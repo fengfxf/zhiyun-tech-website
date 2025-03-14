@@ -4,5 +4,7 @@ export interface ContactFormData {
   email: string;
   company: string;
   message: string;
+  processed?: boolean;
   created_at?: string;
+  updated_at?: string;
 } 

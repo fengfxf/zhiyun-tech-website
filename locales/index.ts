@@ -128,7 +128,10 @@ export const translations: Translations = {
       send: '发送消息',
       messageSent: '消息已发送',
       thankYou: '感谢您的留言，我们会尽快与您联系。',
-      newMessage: '发送新消息'
+      newMessage: '发送新消息',
+      errorGeneric: '提交表单时发生错误，请稍后再试。',
+      errorNetwork: '网络连接错误，请检查您的网络连接。',
+      errorValidation: '请检查您的输入是否正确。'
     },
     demo: {
       title: '体验演示',
@@ -269,7 +272,10 @@ export const translations: Translations = {
       send: 'Send Message',
       messageSent: 'Message Sent',
       thankYou: 'Thank you for your message, we will contact you as soon as possible.',
-      newMessage: 'Send New Message'
+      newMessage: 'Send New Message',
+      errorGeneric: 'An error occurred while submitting the form, please try again later.',
+      errorNetwork: 'Network connection error, please check your network connection.',
+      errorValidation: 'Please check if your input is correct.'
     },
     demo: {
       title: 'Experience Demo',

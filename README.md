@@ -13,6 +13,7 @@
 - **动画**: Framer Motion
 - **国际化**: 自定义Context API实现中英文切换
 - **主题**: 支持明亮/暗黑模式切换
+- **数据存储**: Supabase (PostgreSQL)
 - **部署**: Vercel/自托管服务器
 
 ## 网站结构
@@ -63,7 +64,26 @@
 - 默认会根据用户系统偏好自动选择主题
 - 主题偏好会被保存在本地存储中
 
+### 联系表单数据存储
+- 使用Supabase作为后端数据存储
+- 联系表单提交的数据会存储到Supabase数据库中
+- 实现了错误处理和表单验证
+- 支持国际化的错误消息
+
+## 数据库设置
+
+项目使用Supabase作为后端数据库。要设置数据库，请参考 `supabase/README.md` 文件中的说明。
+
 ## 本地开发
+
+### 环境变量
+
+在项目根目录创建 `.env.local` 文件，并添加以下环境变量：
+
+```
+NEXT_PUBLIC_SUPABASE_URL=你的Supabase项目URL
+NEXT_PUBLIC_SUPABASE_ANON_KEY=你的Supabase匿名密钥
+```
 
 ### 安装依赖
 

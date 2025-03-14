@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useLanguage } from '../contexts/LanguageContext';
+import { submitContactForm } from '../services/contactService';
+import { ContactFormData } from '../types/contact';
 
 export default function ContactSection() {
   const { t } = useLanguage();
@@ -12,7 +14,7 @@ export default function ContactSection() {
     threshold: 0.1,
   });
 
-  const [formState, setFormState] = useState({
+  const [formState, setFormState] = useState<ContactFormData>({
     name: '',
     email: '',
     company: '',
@@ -21,27 +23,38 @@ export default function ContactSection() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormState((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError(null);
     
-    // 模拟表单提交
-    setTimeout(() => {
+    try {
+      const result = await submitContactForm(formState);
+      
+      if (result.success) {
+        setIsSubmitted(true);
+        setFormState({
+          name: '',
+          email: '',
+          company: '',
+          message: '',
+        });
+      } else {
+        setSubmitError(result.error || t('contact.errorGeneric'));
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitError(t('contact.errorGeneric'));
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormState({
-        name: '',
-        email: '',
-        company: '',
-        message: '',
-      });
-    }, 1500);
+    }
   };
 
   return (
@@ -219,6 +232,11 @@ export default function ContactSection() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
+                {submitError && (
+                  <div className="bg-red-50 dark:bg-red-900 p-4 rounded-md">
+                    <p className="text-red-600 dark:text-red-300">{submitError}</p>
+                  </div>
+                )}
                 <div>
                   <label
                     htmlFor="name"

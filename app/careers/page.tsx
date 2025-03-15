@@ -1,6 +1,7 @@
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const jobOpenings = [
   {
@@ -192,6 +193,13 @@ const benefits = [
   },
 ];
 
+const career = 
+  {
+    title: '加入我们',
+    description: '与我们一起探索AI的无限可能，创造改变世界的技术',
+    image: '/images/careers-join-us.jpg',
+  }
+
 export default function Careers() {
   return (
     <div>
@@ -293,7 +301,14 @@ export default function Careers() {
                 </ul>
               </div>
               <div className="relative h-64 sm:h-80 rounded-xl overflow-hidden bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center">
-                <h3 className="text-2xl font-bold text-white">加入我们的团队</h3>
+                {/* <h3 className="text-2xl font-bold text-white">加入我们的团队</h3>
+                 */}
+                 <Image
+                      src={career.image}
+                      alt={career.title}
+                      fill
+                      className="object-cover"
+                    />
               </div>
             </div>
           </div>

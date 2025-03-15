@@ -1,6 +1,7 @@
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const products = [
   {
@@ -74,12 +75,12 @@ export default function Products() {
                       {product.name} 图片
                     </div>
                     {/* 实际项目中替换为真实图片 */}
-                    {/* <Image
+                    <Image
                       src={product.image}
                       alt={product.name}
                       fill
                       className="object-cover"
-                    /> */}
+                    />
                   </div>
                 </div>
                 <div className="w-full lg:w-1/2">

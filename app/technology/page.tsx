@@ -1,6 +1,6 @@
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-
+import Image from 'next/image';
 const technologies = [
   {
     name: '自然语言处理',
@@ -14,6 +14,7 @@ const technologies = [
       '上下文理解',
       '自然语言生成',
     ],
+    image: '/images/tech-nlp.jpg',
   },
   {
     name: '机器学习',
@@ -27,6 +28,7 @@ const technologies = [
       '联邦学习',
       '持续学习',
     ],
+    image: '/images/tech-machine-learning.jpg',
   },
   {
     name: '知识图谱',
@@ -40,6 +42,7 @@ const technologies = [
       '知识更新',
       '多模态知识',
     ],
+    image: '/images/tech-knowledge-graph.jpg',
   },
   {
     name: '多模态交互',
@@ -53,6 +56,7 @@ const technologies = [
       '情境感知',
       '自适应交互',
     ],
+    image: '/images/tech-multimodal-interaction.jpg',
   },
 ];
 
@@ -105,7 +109,13 @@ export default function Technology() {
               >
                 <div className="w-full lg:w-1/2">
                   <div className="relative h-64 rounded-xl overflow-hidden bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center">
-                    <h3 className="text-2xl font-bold text-white">{tech.name}</h3>
+                    {/* <h3 className="text-2xl font-bold text-white">{tech.name}</h3> */}
+                    <Image
+                      src={tech.image}
+                      alt={tech.name}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                 </div>
                 <div className="w-full lg:w-1/2">

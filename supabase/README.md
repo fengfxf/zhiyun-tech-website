@@ -78,4 +78,4 @@
 为了提高查询性能，创建了以下索引：
 
 - `idx_contact_messages_processed`: 在 `processed` 字段上的索引
-- `idx_contact_messages_created_at`: 在 `created_at` 字段上的索引 
+- `idx_contact_messages_created_at`: 在 `created_at` 字段上的索引

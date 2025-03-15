@@ -149,13 +149,13 @@ export default function Footer() {
                 <h3 className="text-base font-medium text-gray-900 dark:text-white">联系我们</h3>
                 <ul className="mt-4 space-y-4">
                   <li className="text-base text-gray-600 dark:text-gray-300">
-                    <span className="font-medium">地址：</span>上海市浦东新区张江高科技园区
+                    <span className="font-medium">地址：</span>上海市浦东软件园三林园一号楼
                   </li>
                   <li className="text-base text-gray-600 dark:text-gray-300">
-                    <span className="font-medium">电话：</span>021-12345678
+                    <span className="font-medium">电话：</span>13761566975
                   </li>
                   <li className="text-base text-gray-600 dark:text-gray-300">
-                    <span className="font-medium">邮箱：</span>contact@zhiyun.tech
+                    <span className="font-medium">邮箱：</span>chris@zhiyuncloud.tech
                   </li>
                 </ul>
               </div>

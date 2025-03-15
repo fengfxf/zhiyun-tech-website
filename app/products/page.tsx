@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 const products = [
   {
-    name: 'ZhiAgent',
+    name: 'Agent',
     description: '智能体平台，能够自主完成复杂任务，提高工作效率。',
     features: [
       '自然语言理解',
@@ -17,7 +17,7 @@ const products = [
     image: '/images/product-zhiagent.jpg',
   },
   {
-    name: 'ZhiAssist',
+    name: 'Assist',
     description: '智能助手，为企业和个人提供全方位的智能服务。',
     features: [
       '个性化推荐',
@@ -30,7 +30,7 @@ const products = [
     image: '/images/product-zhiassist.jpg',
   },
   {
-    name: 'ZhiInsight',
+    name: 'Insight',
     description: '数据分析平台，从海量数据中挖掘有价值的信息和洞察。',
     features: [
       '数据可视化',

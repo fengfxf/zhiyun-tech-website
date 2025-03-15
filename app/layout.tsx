@@ -11,8 +11,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: '上海栉云科技有限公司 - AI应用与智能体开发',
-  description: '上海栉云科技有限公司专注于AI应用和智能体开发，为企业和个人提供先进的人工智能解决方案。',
+  title: '栉云科技 - AI应用与智能体开发',
+  description: '栉云科技专注于AI应用和智能体开发，为企业和个人提供先进的人工智能解决方案。',
   keywords: 'AI, 人工智能, 智能体, 上海栉云科技, 栉云科技, AI应用开发',
 };
 

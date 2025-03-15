@@ -3,25 +3,25 @@ import Footer from '../../components/Footer';
 
 const teamMembers = [
   {
-    name: '张三',
+    name: '齐军',
     role: '创始人 & CEO',
-    bio: '拥有15年AI领域经验，曾在多家知名科技公司担任技术领导职位。',
+    bio: '拥有10年互联网及AI领域经验，曾在多家知名科技公司担任技术领导职位。',
     image: '/images/team-member-1.jpg',
   },
   {
-    name: '李四',
+    name: '王健',
     role: 'CTO',
-    bio: '人工智能专家，拥有多项AI相关专利，曾领导多个大型AI项目的研发。',
+    bio: '人工智能专家,曾领导多个大型AI项目的研发。',
     image: '/images/team-member-2.jpg',
   },
   {
-    name: '王五',
+    name: '门男',
     role: '产品总监',
     bio: '10年产品管理经验，专注于AI产品的用户体验设计和产品策略。',
     image: '/images/team-member-3.jpg',
   },
   {
-    name: '赵六',
+    name: '李策',
     role: '研发总监',
     bio: '计算机科学博士，专注于自然语言处理和机器学习算法研究。',
     image: '/images/team-member-4.jpg',

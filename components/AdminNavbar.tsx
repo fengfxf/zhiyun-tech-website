@@ -11,10 +11,15 @@ export default function AdminNavbar() {
   const pathname = usePathname();
 
   const navItems = [
-    { name: '仪表盘', href: '/admin/dashboard' },
-    { name: '留言管理', href: '/admin/messages' },
+    { name: "仪表盘", href: "/admin/dashboard" },
+    { name: "留言管理", href: "/admin/messages" },
   ];
 
+  /**
+   * 处理用户登出操作
+   * 调用登出接口，清除用户登录状态
+   * @returns {Promise<void>}
+   */
   const handleLogout = async () => {
     await logout();
   };

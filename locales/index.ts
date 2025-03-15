@@ -27,7 +27,7 @@ export const translations: Translations = {
     hero: {
       title1: '智能体技术引领',
       title2: 'AI应用新时代',
-      description: '上海栉云科技有限公司致力于开发先进的AI智能体，帮助企业和个人实现自动化、智能化的工作流程。',
+      description: '栉云科技致力于开发先进的AI智能体，帮助企业和个人实现自动化、智能化的工作流程。',
       exploreProducts: '探索产品',
       freeTrial: '免费体验'
     },

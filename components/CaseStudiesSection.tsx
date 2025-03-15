@@ -77,12 +77,12 @@ export default function CaseStudiesSection() {
                     {t(`caseStudies.${caseStudy.key}.title`)} {t('caseStudies.image')}
                   </div>
                   {/* 实际项目中替换为真实图片 */}
-                  {/* <Image
+                  <Image
                     src={caseStudy.image}
                     alt={t(`caseStudies.${caseStudy.key}.title`)}
                     fill
                     className="object-cover"
-                  /> */}
+                  />
                 </div>
               </div>
               <div className="w-full lg:w-1/2">

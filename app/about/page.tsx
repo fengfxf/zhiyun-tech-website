@@ -6,7 +6,7 @@ const teamMembers = [
     name: '齐军',
     role: '创始人 & CEO',
     bio: '拥有10年互联网及AI领域经验，曾在多家知名科技公司担任技术领导职位。',
-    image: '/images/team-member-1.jpg',
+    image: '/images/qijun.jpg',
   },
   {
     name: '王健',

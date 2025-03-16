@@ -377,14 +377,14 @@ export default function Careers() {
                       </span>
                     </div>
                   </div>
-                  <div className="mt-4 md:mt-0">
+                  {/* <div className="mt-4 md:mt-0">
                     <Link
                       href={`/careers/${job.id}`}
                       className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
                     >
                       查看详情
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
                 <p className="mt-4 text-gray-600 dark:text-gray-300">
                   {job.description}

@@ -21,6 +21,7 @@ export default function Navbar() {
     { name: t('common.careers'), href: '/careers' },
     { name: t('common.demo'), href: '/demo' },
     { name: t('common.contact'), href: '/contact' },
+    { name: t('common.chat'), href: '/chat' },
   ];
 
   useEffect(() => {
@@ -70,10 +71,10 @@ export default function Navbar() {
                 <ThemeToggle />
                 <LanguageToggle />
                 <Link
-                  href="/demo"
+                  href="/chat"
                   className="ml-2 px-4 py-2 rounded-full text-sm font-medium bg-primary-600 text-white hover:bg-primary-700 transition-colors"
                 >
-                  {t('common.tryDemo')}
+                  {t('common.chatWithAI')}
                 </Link>
               </div>
             </div>
@@ -119,11 +120,11 @@ export default function Navbar() {
               </Link>
             ))}
             <Link
-              href="/demo"
+              href="/chat"
               className="block px-3 py-2 rounded-md text-base font-medium text-white bg-primary-600 hover:bg-primary-700 transition-colors"
               onClick={() => setIsOpen(false)}
             >
-              {t('common.tryDemo')}
+              {t('common.chatWithAI')}
             </Link>
           </div>
         </motion.div>

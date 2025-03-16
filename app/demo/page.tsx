@@ -20,10 +20,10 @@ export default function Demo() {
             <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
               <div className="text-center mb-8">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  智能体演示
+                  AI智能客服
                 </h2>
                 <p className="mt-2 text-gray-600 dark:text-gray-300">
-                  与我们的AI智能体进行对话，体验自然语言理解和智能决策能力
+                  与我们的AI智能客服进行对话，体验自然语言理解和智能决策能力
                 </p>
               </div>
 

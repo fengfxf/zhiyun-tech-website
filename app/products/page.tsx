@@ -5,7 +5,7 @@ import Footer from '../../components/Footer';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 // 定义产品类型
@@ -27,6 +27,26 @@ export default function Products() {
     triggerOnce: true,
     threshold: 0.1,
   });
+  
+  // 为产品创建视图引用数组
+  const [productRef1, productInView1] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+  
+  const [productRef2, productInView2] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+  
+  const [productRef3, productInView3] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+  
+  // 产品引用数组
+  const productRefs = [productRef1, productRef2, productRef3];
+  const productInViews = [productInView1, productInView2, productInView3];
   
   // 当语言变化时更新内容
   useEffect(() => {
@@ -127,11 +147,9 @@ export default function Products() {
 
           <div className="mt-16 space-y-16">
             {products.map((product, index) => {
-              // 为每个产品创建视图引用
-              const [productRef, productInView] = useInView({
-                triggerOnce: true,
-                threshold: 0.1,
-              });
+              // 使用预先创建的引用，确保index在范围内
+              const productRef = index < productRefs.length ? productRefs[index] : productRefs[0];
+              const productInView = index < productInViews.length ? productInViews[index] : false;
               
               return (
                 <motion.div

@@ -44,6 +44,31 @@ export default function Technology() {
     threshold: 0.1,
   });
   
+  // 为每个技术创建视图引用
+  const [techRef1, techInView1] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+  
+  const [techRef2, techInView2] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+  
+  const [techRef3, techInView3] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+  
+  const [techRef4, techInView4] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+  
+  // 技术引用数组
+  const techRefs = [techRef1, techRef2, techRef3, techRef4];
+  const techInViews = [techInView1, techInView2, techInView3, techInView4];
+  
   // 当语言变化时更新内容
   useEffect(() => {
     // 技术数据
@@ -194,11 +219,9 @@ export default function Technology() {
 
           <div className="mt-16 space-y-16">
             {technologies.map((tech, index) => {
-              // 为每个技术创建视图引用
-              const [techRef, techInView] = useInView({
-                triggerOnce: true,
-                threshold: 0.1,
-              });
+              // 使用预先创建的引用，确保index在范围内
+              const techRef = index < techRefs.length ? techRefs[index] : techRefs[0];
+              const techInView = index < techInViews.length ? techInViews[index] : false;
               
               return (
                 <motion.div

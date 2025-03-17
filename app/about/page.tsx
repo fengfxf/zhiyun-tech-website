@@ -4,6 +4,8 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 // 定义团队成员和里程碑的类型
 interface TeamMember {
@@ -26,6 +28,58 @@ export default function About() {
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
   const [milestones, setMilestones] = useState<Milestone[]>([]);
   
+  // 添加视图引用
+  const [titleRef, titleInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const [missionRef, missionInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const [milestonesRef, milestonesInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const [teamRef, teamInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const [cultureRef, cultureInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  // 定义动画变体
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
+  const fadeInLeft = {
+    hidden: { opacity: 0, x: -30 },
+    visible: { opacity: 1, x: 0 }
+  };
+
+  const fadeInRight = {
+    hidden: { opacity: 0, x: 30 },
+    visible: { opacity: 1, x: 0 }
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
   // 当语言变化时更新内容
   useEffect(() => {
     // 团队成员数据
@@ -110,58 +164,100 @@ export default function About() {
       <div className="pt-20 bg-white dark:bg-gray-900">
         {/* 公司介绍 */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-          <div className="text-center">
+          <motion.div 
+            ref={titleRef}
+            initial="hidden"
+            animate={titleInView ? "visible" : "hidden"}
+            variants={fadeInUp}
+            transition={{ duration: 0.8 }}
+            className="text-center"
+          >
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white sm:text-5xl">
               {t('about.title') || '关于我们'}
             </h1>
-            <p className="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <motion.p 
+              variants={fadeInUp}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
+            >
               {t('about.description') || '上海栉云科技有限公司是一家专注于AI应用和智能体开发的高科技企业，致力于为企业和个人提供先进的人工智能解决方案。'}
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
-          <div className="mt-16">
+          <motion.div 
+            ref={missionRef}
+            initial="hidden"
+            animate={missionInView ? "visible" : "hidden"}
+            variants={staggerContainer}
+            className="mt-16"
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
+              <motion.div variants={fadeInLeft} transition={{ duration: 0.8 }}>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                   {t('about.mission.title') || '我们的使命'}
                 </h2>
                 <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
                   {t('about.mission.description') || '通过先进的AI技术，让智能体成为人类的得力助手，提高工作效率，创造更多价值。'}
                 </p>
-              </div>
-              <div>
+              </motion.div>
+              <motion.div variants={fadeInRight} transition={{ duration: 0.8, delay: 0.2 }}>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                   {t('about.vision.title') || '我们的愿景'}
                 </h2>
                 <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
                   {t('about.vision.description') || '成为全球领先的AI智能体解决方案提供商，推动人工智能技术的普及和应用。'}
                 </p>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* 发展历程 */}
         <div className="bg-gray-50 dark:bg-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-            <div className="text-center">
+            <motion.div 
+              ref={milestonesRef}
+              initial="hidden"
+              animate={milestonesInView ? "visible" : "hidden"}
+              variants={fadeInUp}
+              transition={{ duration: 0.8 }}
+              className="text-center"
+            >
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
                 {t('about.milestones.title') || '发展历程'}
               </h2>
-              <p className="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              <motion.p 
+                variants={fadeInUp}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+              >
                 {t('about.milestones.subtitle') || '我们的成长足迹'}
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
 
-            <div className="mt-12 relative">
+            <motion.div 
+              className="mt-12 relative"
+              variants={staggerContainer}
+              initial="hidden"
+              animate={milestonesInView ? "visible" : "hidden"}
+            >
               <div className="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gray-200 dark:bg-gray-700"></div>
               <div className="space-y-12">
                 {milestones.map((milestone, index) => (
-                  <div key={milestone.year} className="relative">
+                  <motion.div 
+                    key={milestone.year} 
+                    className="relative"
+                    variants={fadeInUp}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
                     <div className="flex items-center">
-                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white font-bold z-10">
+                      <motion.div 
+                        className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white font-bold z-10"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.3 }}
+                      >
                         {milestone.year}
-                      </div>
+                      </motion.div>
                       <div className="ml-6">
                         <h3 className="text-xl font-bold text-gray-900 dark:text-white">
                           {milestone.title}
@@ -171,28 +267,57 @@ export default function About() {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
 
         {/* 团队介绍 */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-          <div className="text-center">
+          <motion.div 
+            ref={teamRef}
+            initial="hidden"
+            animate={teamInView ? "visible" : "hidden"}
+            variants={fadeInUp}
+            transition={{ duration: 0.8 }}
+            className="text-center"
+          >
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
               {t('about.team.title') || '我们的团队'}
             </h2>
-            <p className="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <motion.p 
+              variants={fadeInUp}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+            >
               {t('about.team.subtitle') || '由一群充满激情和创造力的专业人士组成'}
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {teamMembers.map((member) => (
-              <div key={member.name} className="card p-6 text-center">
-                <div className="w-32 h-32 mx-auto rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+          <motion.div 
+            className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            animate={teamInView ? "visible" : "hidden"}
+          >
+            {teamMembers.map((member, index) => (
+              <motion.div 
+                key={member.name} 
+                className="card p-6 text-center"
+                variants={fadeInUp}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+                }}
+              >
+                <motion.div 
+                  className="w-32 h-32 mx-auto rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 flex items-center justify-center"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
+                >
                   <span className="text-gray-500 dark:text-gray-400">
                     {member.name.charAt(0)}
                   </span>
@@ -204,7 +329,7 @@ export default function About() {
                     height={128}
                     className="object-cover"
                   /> */}
-                </div>
+                </motion.div>
                 <h3 className="mt-4 text-xl font-semibold text-gray-900 dark:text-white">
                   {member.name}
                 </h3>
@@ -214,26 +339,55 @@ export default function About() {
                 <p className="mt-2 text-gray-600 dark:text-gray-300">
                   {member.bio}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* 公司文化 */}
         <div className="bg-gray-50 dark:bg-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-            <div className="text-center">
+            <motion.div 
+              ref={cultureRef}
+              initial="hidden"
+              animate={cultureInView ? "visible" : "hidden"}
+              variants={fadeInUp}
+              transition={{ duration: 0.8 }}
+              className="text-center"
+            >
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
                 {t('about.culture.title') || '公司文化'}
               </h2>
-              <p className="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              <motion.p 
+                variants={fadeInUp}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+              >
                 {t('about.culture.subtitle') || '我们的核心价值观'}
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="card p-6">
-                <div className="w-12 h-12 bg-primary-100 dark:bg-primary-800 rounded-full flex items-center justify-center mb-4">
+            <motion.div 
+              className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8"
+              variants={staggerContainer}
+              initial="hidden"
+              animate={cultureInView ? "visible" : "hidden"}
+            >
+              {/* 创新 */}
+              <motion.div 
+                className="card p-6"
+                variants={fadeInUp}
+                transition={{ duration: 0.5 }}
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+                }}
+              >
+                <motion.div 
+                  className="w-12 h-12 bg-primary-100 dark:bg-primary-800 rounded-full flex items-center justify-center mb-4"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.8 }}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6 text-primary-600 dark:text-primary-400"
@@ -248,16 +402,30 @@ export default function About() {
                       d="M13 10V3L4 14h7v7l9-11h-7z"
                     />
                   </svg>
-                </div>
+                </motion.div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                   {t('about.culture.value1.title') || '创新'}
                 </h3>
                 <p className="mt-2 text-gray-600 dark:text-gray-300">
                   {t('about.culture.value1.description') || '我们鼓励创新思维，不断探索AI技术的新可能性，推动行业发展。'}
                 </p>
-              </div>
-              <div className="card p-6">
-                <div className="w-12 h-12 bg-primary-100 dark:bg-primary-800 rounded-full flex items-center justify-center mb-4">
+              </motion.div>
+
+              {/* 协作 */}
+              <motion.div 
+                className="card p-6"
+                variants={fadeInUp}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+                }}
+              >
+                <motion.div 
+                  className="w-12 h-12 bg-primary-100 dark:bg-primary-800 rounded-full flex items-center justify-center mb-4"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.8 }}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6 text-primary-600 dark:text-primary-400"
@@ -272,16 +440,30 @@ export default function About() {
                       d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
                     />
                   </svg>
-                </div>
+                </motion.div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                   {t('about.culture.value2.title') || '协作'}
                 </h3>
                 <p className="mt-2 text-gray-600 dark:text-gray-300">
                   {t('about.culture.value2.description') || '我们重视团队协作，相信集体智慧的力量，共同创造卓越的产品和服务。'}
                 </p>
-              </div>
-              <div className="card p-6">
-                <div className="w-12 h-12 bg-primary-100 dark:bg-primary-800 rounded-full flex items-center justify-center mb-4">
+              </motion.div>
+
+              {/* 责任 */}
+              <motion.div 
+                className="card p-6"
+                variants={fadeInUp}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+                }}
+              >
+                <motion.div 
+                  className="w-12 h-12 bg-primary-100 dark:bg-primary-800 rounded-full flex items-center justify-center mb-4"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.8 }}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6 text-primary-600 dark:text-primary-400"
@@ -296,15 +478,15 @@ export default function About() {
                       d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
                     />
                   </svg>
-                </div>
+                </motion.div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                   {t('about.culture.value3.title') || '责任'}
                 </h3>
                 <p className="mt-2 text-gray-600 dark:text-gray-300">
                   {t('about.culture.value3.description') || '我们对技术和产品负责，确保AI的安全和道德使用，为社会创造积极价值。'}
                 </p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </div>

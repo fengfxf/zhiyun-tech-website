@@ -1,51 +1,82 @@
+"use client";
+
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { useEffect, useState } from 'react';
 
-const products = [
-  {
-    name: 'Agent',
-    description: '智能体平台，能够自主完成复杂任务，提高工作效率。',
-    features: [
-      '自然语言理解',
-      '多模态交互',
-      '智能决策',
-      '自动化执行',
-      '持续学习',
-      '系统集成',
-    ],
-    image: '/images/product-zhiagent.jpg',
-  },
-  {
-    name: 'Assist',
-    description: '智能助手，为企业和个人提供全方位的智能服务。',
-    features: [
-      '个性化推荐',
-      '智能问答',
-      '日程管理',
-      '信息检索',
-      '内容生成',
-      '多语言支持',
-    ],
-    image: '/images/product-zhiassist.jpg',
-  },
-  {
-    name: 'Insight',
-    description: '数据分析平台，从海量数据中挖掘有价值的信息和洞察。',
-    features: [
-      '数据可视化',
-      '趋势分析',
-      '异常检测',
-      '预测分析',
-      '报告生成',
-      'API集成',
-    ],
-    image: '/images/product-zhiinsight.jpg',
-  },
-];
+// 定义产品类型
+interface Product {
+  name: string;
+  description: string;
+  features: string[];
+  image: string;
+}
 
 export default function Products() {
+  const { t, locale } = useLanguage();
+  
+  // 使用状态来存储翻译后的数据
+  const [products, setProducts] = useState<Product[]>([]);
+  
+  // 当语言变化时更新内容
+  useEffect(() => {
+    // 产品数据
+    const productData = [
+      {
+        nameKey: 'products.agent.name',
+        descriptionKey: 'products.agent.description',
+        featuresKeys: [
+          'products.agent.features.nlp',
+          'products.agent.features.multimodal',
+          'products.agent.features.decision',
+          'products.agent.features.automation',
+          'products.agent.features.learning',
+          'products.agent.features.integration',
+        ],
+        image: '/images/product-zhiagent.jpg',
+      },
+      {
+        nameKey: 'products.assist.name',
+        descriptionKey: 'products.assist.description',
+        featuresKeys: [
+          'products.assist.features.recommendation',
+          'products.assist.features.qa',
+          'products.assist.features.schedule',
+          'products.assist.features.retrieval',
+          'products.assist.features.generation',
+          'products.assist.features.multilingual',
+        ],
+        image: '/images/product-zhiassist.jpg',
+      },
+      {
+        nameKey: 'products.insight.name',
+        descriptionKey: 'products.insight.description',
+        featuresKeys: [
+          'products.insight.features.visualization',
+          'products.insight.features.trend',
+          'products.insight.features.anomaly',
+          'products.insight.features.prediction',
+          'products.insight.features.report',
+          'products.insight.features.api',
+        ],
+        image: '/images/product-zhiinsight.jpg',
+      },
+    ];
+    
+    // 翻译产品数据
+    const translatedProducts = productData.map(product => ({
+      name: t(product.nameKey) || product.nameKey.split('.').pop() || 'Product',
+      description: t(product.descriptionKey) || '智能产品，提供先进的AI功能。',
+      features: product.featuresKeys.map(key => t(key) || key.split('.').pop() || 'Feature'),
+      image: product.image
+    }));
+    
+    setProducts(translatedProducts);
+  }, [t, locale]); // 添加locale作为依赖项，确保语言变化时重新执行
+  
   return (
     <div>
       <Navbar />
@@ -53,10 +84,10 @@ export default function Products() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
           <div className="text-center">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white sm:text-5xl">
-              我们的产品
+              {t('products.title') || '我们的产品'}
             </h1>
             <p className="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              栉云科技提供一系列先进的AI产品和解决方案，满足不同行业和场景的需求
+              {t('products.subtitle') || '栉云科技提供一系列先进的AI产品和解决方案，满足不同行业和场景的需求'}
             </p>
           </div>
 
@@ -72,7 +103,7 @@ export default function Products() {
                   <div className="relative h-64 sm:h-80 rounded-xl overflow-hidden">
                     <div className="absolute inset-0 bg-primary-600 opacity-20 dark:opacity-40"></div>
                     <div className="absolute inset-0 flex items-center justify-center text-white text-lg font-medium">
-                      {product.name} 图片
+                      {product.name} {t('products.image') || '图片'}
                     </div>
                     {/* 实际项目中替换为真实图片 */}
                     <Image
@@ -92,10 +123,10 @@ export default function Products() {
                   </p>
                   <div className="mt-6">
                     <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                      主要功能
+                      {t('products.features') || '主要功能'}
                     </h3>
                     <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2">
-                      {product.features.map((feature) => (
+                      {product.features.map((feature: string) => (
                         <li
                           key={feature}
                           className="flex items-center text-gray-600 dark:text-gray-300"
@@ -123,7 +154,7 @@ export default function Products() {
                       href="#"
                       className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
                     >
-                      了解更多
+                      {t('common.learnMore') || '了解更多'}
                     </a>
                   </div>
                 </div>

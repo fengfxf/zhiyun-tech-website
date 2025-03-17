@@ -12,17 +12,23 @@ import LanguageToggle from './LanguageToggle';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { t, isLoading } = useLanguage();
+  const { t, isLoading, locale } = useLanguage();
   const pathname = usePathname();
 
-  const navigation = [
-    { name: t('common.home'), href: '/' },
-    { name: t('common.products'), href: '/products' },
-    { name: t('common.technology'), href: '/technology' },
-    { name: t('common.about'), href: '/about' },
-    { name: t('common.careers'), href: '/careers' },
-    { name: t('common.contact'), href: '/contact' },
-  ];
+  // 将导航项移到useEffect内部，确保在语言变化时重新生成
+  const [navigation, setNavigation] = useState<Array<{name: string, href: string}>>([]);
+
+  // 当语言变化时更新导航项
+  useEffect(() => {
+    setNavigation([
+      { name: t('common.home'), href: '/' },
+      { name: t('common.products'), href: '/products' },
+      { name: t('common.technology'), href: '/technology' },
+      { name: t('common.about'), href: '/about' },
+      { name: t('common.careers'), href: '/careers' },
+      { name: t('common.contact'), href: '/contact' },
+    ]);
+  }, [t, locale]); // 添加locale作为依赖项，确保语言变化时重新执行
 
   useEffect(() => {
     const handleScroll = () => {

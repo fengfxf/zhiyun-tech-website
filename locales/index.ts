@@ -199,6 +199,14 @@ export const translations: Translations = {
       researchDescription: '我们持续投入研究，推动AI技术的发展和创新',
       advantages: '技术优势',
       advantagesDescription: '我们的技术具有以下显著优势',
+      advantagesItems: {
+        performance: '高性能',
+        performanceDesc: '我们的技术经过优化，能够高效处理大规模数据和复杂任务，提供快速响应。',
+        reliability: '高可靠性',
+        reliabilityDesc: '我们的技术经过严格测试和验证，确保在各种场景下稳定可靠地运行。',
+        flexibility: '灵活扩展',
+        flexibilityDesc: '我们的技术架构灵活可扩展，能够根据需求快速适应不同场景和规模的应用。'
+      },
       nlp: {
         name: '自然语言处理',
         description: '我们的自然语言处理技术能够理解和生成人类语言，支持多语言交互，准确把握用户意图。',
@@ -264,14 +272,6 @@ export const translations: Translations = {
           name: 'AI安全与伦理',
           description: '研究AI技术的安全性和伦理问题，确保技术的负责任应用。'
         }
-      },
-      advantages: {
-        performance: '高性能',
-        performanceDesc: '我们的技术经过优化，能够高效处理大规模数据和复杂任务，提供快速响应。',
-        reliability: '高可靠性',
-        reliabilityDesc: '我们的技术经过严格测试和验证，确保在各种场景下稳定可靠地运行。',
-        flexibility: '灵活扩展',
-        flexibilityDesc: '我们的技术架构灵活可扩展，能够根据需求快速适应不同场景和规模的应用。'
       }
     },
     about: {
@@ -660,12 +660,20 @@ export const translations: Translations = {
     },
     technology: {
       title: 'Our Technology',
-      subtitle: 'Zhiyun Technology has a series of advanced AI technologies to provide powerful capability support for intelligent agents',
+      subtitle: 'Zhiyun Tech has a series of advanced AI technologies that provide powerful capabilities for intelligent agents',
       coreCapabilities: 'Core Capabilities',
       researchAreas: 'Research Areas',
-      researchDescription: 'We continuously invest in research to promote the development and innovation of AI technology',
+      researchDescription: 'We continuously invest in research to drive the development and innovation of AI technology',
       advantages: 'Technical Advantages',
       advantagesDescription: 'Our technology has the following significant advantages',
+      advantagesItems: {
+        performance: 'High Performance',
+        performanceDesc: 'Our technology is optimized to efficiently process large-scale data and complex tasks, providing fast responses.',
+        reliability: 'High Reliability',
+        reliabilityDesc: 'Our technology has been rigorously tested and validated to ensure stable and reliable operation in various scenarios.',
+        flexibility: 'Flexible Scalability',
+        flexibilityDesc: 'Our technology architecture is flexible and scalable, able to quickly adapt to different scenarios and application scales according to requirements.'
+      },
       nlp: {
         name: 'Natural Language Processing',
         description: 'Our natural language processing technology can understand and generate human language, support multilingual interaction, and accurately grasp user intent.',
@@ -731,14 +739,6 @@ export const translations: Translations = {
           name: 'AI Safety and Ethics',
           description: 'Research the safety and ethical issues of AI technology to ensure responsible application of technology.'
         }
-      },
-      advantages: {
-        performance: 'High Performance',
-        performanceDesc: 'Our technology is optimized to efficiently process large-scale data and complex tasks, providing fast responses.',
-        reliability: 'High Reliability',
-        reliabilityDesc: 'Our technology has been rigorously tested and validated to ensure stable and reliable operation in various scenarios.',
-        flexibility: 'Flexible Scalability',
-        flexibilityDesc: 'Our technology architecture is flexibly scalable and can quickly adapt to different scenarios and scales of applications according to requirements.'
       }
     },
     about: {

@@ -1,62 +1,109 @@
+'use client';
+
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { useEffect, useState } from 'react';
 
-const teamMembers = [
-  {
-    name: '齐军',
-    role: '创始人 & CEO',
-    bio: '拥有10年互联网及AI领域经验，曾在多家知名科技公司担任技术领导职位。',
-    image: '/images/qijun.jpg',
-  },
-  {
-    name: '王健',
-    role: 'CTO',
-    bio: '人工智能专家,曾领导多个大型AI项目的研发。',
-    image: '/images/team-member-2.jpg',
-  },
-  {
-    name: '门男',
-    role: '产品总监',
-    bio: '10年产品管理经验，专注于AI产品的用户体验设计和产品策略。',
-    image: '/images/team-member-3.jpg',
-  },
-  {
-    name: '李策',
-    role: '研发总监',
-    bio: '计算机科学博士，专注于自然语言处理和机器学习算法研究。',
-    image: '/images/team-member-4.jpg',
-  },
-];
+// 定义团队成员和里程碑的类型
+interface TeamMember {
+  name: string;
+  role: string;
+  bio: string;
+  image: string;
+}
 
-const milestones = [
-  {
-    year: '2020',
-    title: '公司成立',
-    description: '上海栉云科技有限公司在上海张江高科技园区成立。',
-  },
-  {
-    year: '2021',
-    title: '首轮融资',
-    description: '获得A轮融资1000万元，加速产品研发和团队扩张。',
-  },
-  {
-    year: '2022',
-    title: '产品发布',
-    description: '成功发布第一款AI智能体产品，获得市场广泛关注。',
-  },
-  {
-    year: '2023',
-    title: '业务扩展',
-    description: '客户数量突破100家，业务覆盖金融、制造、教育等多个行业。',
-  },
-  {
-    year: '2024',
-    title: '技术突破',
-    description: '在智能体技术领域取得重大突破，发布新一代AI智能体平台。',
-  },
-];
+interface Milestone {
+  year: string;
+  title: string;
+  description: string;
+}
 
 export default function About() {
+  const { t, locale } = useLanguage();
+  
+  // 使用状态来存储翻译后的数据
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+  const [milestones, setMilestones] = useState<Milestone[]>([]);
+  
+  // 当语言变化时更新内容
+  useEffect(() => {
+    // 团队成员数据
+    const teamData = [
+      {
+        nameKey: 'about.team.member1.name',
+        roleKey: 'about.team.member1.role',
+        bioKey: 'about.team.member1.bio',
+        image: '/images/qijun.jpg',
+      },
+      {
+        nameKey: 'about.team.member2.name',
+        roleKey: 'about.team.member2.role',
+        bioKey: 'about.team.member2.bio',
+        image: '/images/team-member-2.jpg',
+      },
+      {
+        nameKey: 'about.team.member3.name',
+        roleKey: 'about.team.member3.role',
+        bioKey: 'about.team.member3.bio',
+        image: '/images/team-member-3.jpg',
+      },
+      {
+        nameKey: 'about.team.member4.name',
+        roleKey: 'about.team.member4.role',
+        bioKey: 'about.team.member4.bio',
+        image: '/images/team-member-4.jpg',
+      },
+    ];
+    
+    // 里程碑数据
+    const milestoneData = [
+      {
+        year: '2020',
+        titleKey: 'about.milestones.milestone1.title',
+        descriptionKey: 'about.milestones.milestone1.description',
+      },
+      {
+        year: '2021',
+        titleKey: 'about.milestones.milestone2.title',
+        descriptionKey: 'about.milestones.milestone2.description',
+      },
+      {
+        year: '2022',
+        titleKey: 'about.milestones.milestone3.title',
+        descriptionKey: 'about.milestones.milestone3.description',
+      },
+      {
+        year: '2023',
+        titleKey: 'about.milestones.milestone4.title',
+        descriptionKey: 'about.milestones.milestone4.description',
+      },
+      {
+        year: '2024',
+        titleKey: 'about.milestones.milestone5.title',
+        descriptionKey: 'about.milestones.milestone5.description',
+      },
+    ];
+    
+    // 翻译团队成员数据
+    const translatedTeam = teamData.map(member => ({
+      name: t(member.nameKey) || member.nameKey.split('.').pop() || '团队成员',
+      role: t(member.roleKey) || member.roleKey.split('.').pop() || '职位',
+      bio: t(member.bioKey) || member.bioKey.split('.').pop() || '个人简介',
+      image: member.image
+    }));
+    
+    // 翻译里程碑数据
+    const translatedMilestones = milestoneData.map(milestone => ({
+      year: milestone.year,
+      title: t(milestone.titleKey) || milestone.titleKey.split('.').pop() || '里程碑',
+      description: t(milestone.descriptionKey) || milestone.descriptionKey.split('.').pop() || '描述',
+    }));
+    
+    setTeamMembers(translatedTeam);
+    setMilestones(translatedMilestones);
+  }, [t, locale]); // 添加locale作为依赖项，确保语言变化时重新执行
+  
   return (
     <div>
       <Navbar />
@@ -65,10 +112,10 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
           <div className="text-center">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white sm:text-5xl">
-              关于我们
+              {t('about.title') || '关于我们'}
             </h1>
             <p className="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              上海栉云科技有限公司是一家专注于AI应用和智能体开发的高科技企业，致力于为企业和个人提供先进的人工智能解决方案。
+              {t('about.description') || '上海栉云科技有限公司是一家专注于AI应用和智能体开发的高科技企业，致力于为企业和个人提供先进的人工智能解决方案。'}
             </p>
           </div>
 
@@ -76,18 +123,18 @@ export default function About() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  我们的使命
+                  {t('about.mission.title') || '我们的使命'}
                 </h2>
                 <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-                  通过先进的AI技术，让智能体成为人类的得力助手，提高工作效率，创造更多价值。
+                  {t('about.mission.description') || '通过先进的AI技术，让智能体成为人类的得力助手，提高工作效率，创造更多价值。'}
                 </p>
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  我们的愿景
+                  {t('about.vision.title') || '我们的愿景'}
                 </h2>
                 <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-                  成为全球领先的AI智能体解决方案提供商，推动人工智能技术的普及和应用。
+                  {t('about.vision.description') || '成为全球领先的AI智能体解决方案提供商，推动人工智能技术的普及和应用。'}
                 </p>
               </div>
             </div>
@@ -99,10 +146,10 @@ export default function About() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
             <div className="text-center">
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-                发展历程
+                {t('about.milestones.title') || '发展历程'}
               </h2>
               <p className="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                我们的成长足迹
+                {t('about.milestones.subtitle') || '我们的成长足迹'}
               </p>
             </div>
 
@@ -135,10 +182,10 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-              我们的团队
+              {t('about.team.title') || '我们的团队'}
             </h2>
             <p className="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              由一群充满激情和创造力的专业人士组成
+              {t('about.team.subtitle') || '由一群充满激情和创造力的专业人士组成'}
             </p>
           </div>
 
@@ -177,10 +224,10 @@ export default function About() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
             <div className="text-center">
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-                公司文化
+                {t('about.culture.title') || '公司文化'}
               </h2>
               <p className="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                我们的核心价值观
+                {t('about.culture.subtitle') || '我们的核心价值观'}
               </p>
             </div>
 
@@ -203,10 +250,10 @@ export default function About() {
                   </svg>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  创新
+                  {t('about.culture.value1.title') || '创新'}
                 </h3>
                 <p className="mt-2 text-gray-600 dark:text-gray-300">
-                  我们鼓励创新思维，不断探索AI技术的新可能性，推动行业发展。
+                  {t('about.culture.value1.description') || '我们鼓励创新思维，不断探索AI技术的新可能性，推动行业发展。'}
                 </p>
               </div>
               <div className="card p-6">
@@ -227,10 +274,10 @@ export default function About() {
                   </svg>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  协作
+                  {t('about.culture.value2.title') || '协作'}
                 </h3>
                 <p className="mt-2 text-gray-600 dark:text-gray-300">
-                  我们重视团队协作，相信集体智慧的力量，共同创造卓越的产品和服务。
+                  {t('about.culture.value2.description') || '我们重视团队协作，相信集体智慧的力量，共同创造卓越的产品和服务。'}
                 </p>
               </div>
               <div className="card p-6">
@@ -251,10 +298,10 @@ export default function About() {
                   </svg>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  责任
+                  {t('about.culture.value3.title') || '责任'}
                 </h3>
                 <p className="mt-2 text-gray-600 dark:text-gray-300">
-                  我们秉持负责任的态度开发AI技术，确保技术的安全、可靠和符合伦理标准。
+                  {t('about.culture.value3.description') || '我们对技术和产品负责，确保AI的安全和道德使用，为社会创造积极价值。'}
                 </p>
               </div>
             </div>

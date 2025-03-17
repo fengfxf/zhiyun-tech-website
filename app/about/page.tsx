@@ -6,6 +6,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import Image from 'next/image';
 
 // 定义团队成员和里程碑的类型
 interface TeamMember {
@@ -94,19 +95,19 @@ export default function About() {
         nameKey: 'about.team.member2.name',
         roleKey: 'about.team.member2.role',
         bioKey: 'about.team.member2.bio',
-        image: '/images/team-member-2.jpg',
+        image: '/images/wangjian.jpg',
       },
       {
         nameKey: 'about.team.member3.name',
         roleKey: 'about.team.member3.role',
         bioKey: 'about.team.member3.bio',
-        image: '/images/team-member-3.jpg',
+        image: '/images/mennan.jpg',
       },
       {
         nameKey: 'about.team.member4.name',
         roleKey: 'about.team.member4.role',
         bioKey: 'about.team.member4.bio',
-        image: '/images/team-member-4.jpg',
+        image: '/images/lice.jpg',
       },
     ];
     
@@ -296,49 +297,34 @@ export default function About() {
             </motion.p>
           </motion.div>
 
-          <motion.div 
-            className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
-            variants={staggerContainer}
+          <motion.div
+            ref={teamRef}
             initial="hidden"
             animate={teamInView ? "visible" : "hidden"}
+            variants={fadeInUp}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12"
           >
             {teamMembers.map((member, index) => (
-              <motion.div 
-                key={member.name} 
-                className="card p-6 text-center"
+              <motion.div
+                key={index}
                 variants={fadeInUp}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
-                }}
+                whileHover={{ scale: 1.05 }}
+                className="bg-white rounded-lg shadow-lg overflow-hidden p-6 text-center"
               >
-                <motion.div 
-                  className="w-32 h-32 mx-auto rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 flex items-center justify-center"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <span className="text-gray-500 dark:text-gray-400">
-                    {member.name.charAt(0)}
-                  </span>
-                  {/* 实际项目中替换为真实图片 */}
-                  {/* <Image
+                <div className="relative w-32 h-32 mx-auto mb-4">
+                  <Image
                     src={member.image}
                     alt={member.name}
-                    width={128}
-                    height={128}
-                    className="object-cover"
-                  /> */}
-                </motion.div>
-                <h3 className="mt-4 text-xl font-semibold text-gray-900 dark:text-white">
-                  {member.name}
-                </h3>
-                <p className="text-primary-600 dark:text-primary-400">
-                  {member.role}
-                </p>
-                <p className="mt-2 text-gray-600 dark:text-gray-300">
-                  {member.bio}
-                </p>
+                    fill
+                    style={{ objectFit: 'contain' }}
+                    className="rounded-full"
+                  />
+                </div>
+                <div className="mt-4">
+                  <h3 className="text-xl font-semibold mb-2">{member.name}</h3>
+                  <p className="text-gray-600 mb-3">{member.role}</p>
+                  <p className="text-gray-700 text-sm">{member.bio}</p>
+                </div>
               </motion.div>
             ))}
           </motion.div>

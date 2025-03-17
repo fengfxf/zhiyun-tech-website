@@ -168,7 +168,7 @@ export default function ContactSection() {
               <div className="flex space-x-4">
                 <a
                   href="#"
-                  className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                  className="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
                 >
                   <span className="sr-only">微信</span>
                   <svg
@@ -181,7 +181,7 @@ export default function ContactSection() {
                 </a>
                 <a
                   href="#"
-                  className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                  className="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
                 >
                   <span className="sr-only">微博</span>
                   <svg
@@ -202,10 +202,10 @@ export default function ContactSection() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             {isSubmitted ? (
-              <div className="bg-green-50 dark:bg-green-900 p-8 rounded-xl text-center">
+              <div className="bg-green-50 p-8 rounded-xl text-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-16 w-16 mx-auto text-green-500 dark:text-green-400"
+                  className="h-16 w-16 mx-auto text-green-500"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -217,10 +217,10 @@ export default function ContactSection() {
                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <h3 className="mt-4 text-xl font-semibold text-gray-900 dark:text-white">
+                <h3 className="mt-4 text-xl font-semibold text-gray-900">
                   {t('contact.messageSent')}
                 </h3>
-                <p className="mt-2 text-gray-600 dark:text-gray-300">
+                <p className="mt-2 text-gray-600">
                   {t('contact.thankYou')}
                 </p>
                 <button
@@ -233,8 +233,8 @@ export default function ContactSection() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 {submitError && (
-                  <div className="bg-red-50 dark:bg-red-900 p-4 rounded-md">
-                    <p className="text-red-600 dark:text-red-300">{submitError}</p>
+                  <div className="bg-red-50 p-4 rounded-md">
+                    <p className="text-red-600">{submitError}</p>
                   </div>
                 )}
                 <div>
@@ -251,7 +251,7 @@ export default function ContactSection() {
                     required
                     value={formState.name}
                     onChange={handleChange}
-                    className="mt-1 block w-full border-gray-300 dark:border-gray-700 rounded-md shadow-sm py-2 px-3 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-white"
+                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-white"
                   />
                 </div>
                 <div>
@@ -268,7 +268,7 @@ export default function ContactSection() {
                     required
                     value={formState.email}
                     onChange={handleChange}
-                    className="mt-1 block w-full border-gray-300 dark:border-gray-700 rounded-md shadow-sm py-2 px-3 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-white"
+                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-white"
                   />
                 </div>
                 <div>
@@ -284,7 +284,7 @@ export default function ContactSection() {
                     id="company"
                     value={formState.company}
                     onChange={handleChange}
-                    className="mt-1 block w-full border-gray-300 dark:border-gray-700 rounded-md shadow-sm py-2 px-3 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-white"
+                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-white"
                   />
                 </div>
                 <div>
@@ -301,7 +301,7 @@ export default function ContactSection() {
                     required
                     value={formState.message}
                     onChange={handleChange}
-                    className="mt-1 block w-full border-gray-300 dark:border-gray-700 rounded-md shadow-sm py-2 px-3 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-white"
+                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-white"
                   ></textarea>
                 </div>
                 <div>

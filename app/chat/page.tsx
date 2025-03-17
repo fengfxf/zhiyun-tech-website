@@ -25,10 +25,10 @@ export default function ChatPage() {
             </h2>
             <p className="text-gray-600 dark:text-gray-300">
               如果您需要与人工客服联系，请发送邮件至 
-              <a href="mailto:contact@zhiyun.tech" className="text-primary-600 dark:text-primary-400 hover:underline">
-                contact@zhiyun.tech
+              <a href="chris@zhiyuncloud.tech" className="text-primary-600 dark:text-primary-400 hover:underline">
+                chris@zhiyuncloud.tech
               </a> 
-              或拨打我们的客服热线 021-12345678
+              或拨打我们的客服热线 13761566975
             </p>
           </div>
         </div>

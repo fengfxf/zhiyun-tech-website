@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -12,6 +13,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { t, isLoading } = useLanguage();
+  const pathname = usePathname();
 
   const navigation = [
     { name: t('common.home'), href: '/' },
@@ -65,7 +67,11 @@ export default function Navbar() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="px-3 py-2 rounded-md text-sm font-medium text-gray-800 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                  className={`px-3 py-2 rounded-md text-sm font-medium ${
+                    pathname === item.href
+                      ? 'text-primary-600 font-semibold'
+                      : 'text-gray-800 hover:text-primary-600'
+                  } transition-colors`}
                 >
                   {item.name}
                 </Link>
@@ -116,7 +122,11 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                className={`block px-3 py-2 rounded-md text-base font-medium ${
+                  pathname === item.href
+                    ? 'text-primary-600 font-semibold'
+                    : 'text-gray-800 hover:text-primary-600'
+                } transition-colors`}
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}

@@ -1,7 +1,107 @@
+'use client';
+import { useState, useRef, useEffect } from 'react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import { Message } from '../../types/chat';
+import { sendMessage } from '../../services/ai';
 
 export default function Demo() {
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      role: 'ai',
+      content: '你好！我是栉云科技的AI智能体助手。我可以帮助你回答问题、提供信息、执行任务等。请问有什么我可以帮助你的吗？'
+    }
+  ]);
+  const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [conversationId, setConversationId] = useState<string | null>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  // 保存对话历史到本地存储
+  useEffect(() => {
+    if (messages.length > 1) {
+      localStorage.setItem('chatHistory', JSON.stringify(messages));
+    }
+  }, [messages]);
+
+  // 从本地存储加载对话历史
+  useEffect(() => {
+    const savedHistory = localStorage.getItem('chatHistory');
+    if (savedHistory) {
+      try {
+        const parsedHistory = JSON.parse(savedHistory);
+        setMessages(parsedHistory);
+      } catch (error) {
+        console.error('Failed to parse chat history:', error);
+      }
+    }
+  }, []);
+
+  const handleSend = async () => {
+    if (!input.trim() || isLoading) return;
+
+    const userMessage = input.trim();
+    setInput('');
+    setIsLoading(true);
+
+    // Add user message
+    setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+
+    try {
+      // Add AI typing indicator
+      setMessages(prev => [...prev, { role: 'ai', content: '', isTyping: true }]);
+
+      // Get AI response
+      const response = await sendMessage(userMessage);
+
+      // Remove typing indicator and add AI response
+      setMessages(prev => {
+        const filtered = prev.filter(msg => !msg.isTyping);
+        return [...filtered, { role: 'ai', content: response.content }];
+      });
+
+      if (response.error) {
+        console.error('AI response error:', response.error);
+      }
+    } catch (error) {
+      console.error('Failed to get AI response:', error);
+      // Handle error
+      setMessages(prev => {
+        const filtered = prev.filter(msg => !msg.isTyping);
+        return [...filtered, { role: 'ai', content: '抱歉，我遇到了一些问题。请稍后再试。' }];
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  };
+
+  const handleClearHistory = () => {
+    setMessages([
+      {
+        role: 'ai',
+        content: '你好！我是栉云科技的AI智能体助手。我可以帮助你回答问题、提供信息、执行任务等。请问有什么我可以帮助你的吗？'
+      }
+    ]);
+    localStorage.removeItem('chatHistory');
+    setConversationId(null);
+  };
+
   return (
     <div>
       <Navbar />
@@ -18,74 +118,88 @@ export default function Demo() {
 
           <div className="mt-16">
             <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
-              <div className="text-center mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  AI智能客服
-                </h2>
-                <p className="mt-2 text-gray-600 dark:text-gray-300">
-                  与我们的AI智能客服进行对话，体验自然语言理解和智能决策能力
-                </p>
+              <div className="flex justify-between items-center mb-8">
+                <div className="text-center flex-grow">
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                    AI智能客服
+                  </h2>
+                  <p className="mt-2 text-gray-600 dark:text-gray-300">
+                    与我们的AI智能客服进行对话，体验自然语言理解和智能决策能力
+                  </p>
+                </div>
+                <button
+                  onClick={handleClearHistory}
+                  className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                >
+                  清除历史记录
+                </button>
               </div>
 
               <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-4 h-96 overflow-y-auto mb-4">
                 <div className="space-y-4">
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary-600 flex items-center justify-center text-white font-bold">
-                      AI
+                  {messages.map((message, index) => (
+                    <div
+                      key={index}
+                      className={`flex items-start ${
+                        message.role === 'user' ? 'justify-end' : ''
+                      }`}
+                    >
+                      {message.role === 'ai' && (
+                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary-600 flex items-center justify-center text-white font-bold">
+                          AI
+                        </div>
+                      )}
+                      <div
+                        className={`${
+                          message.role === 'user'
+                            ? 'mr-3 bg-primary-100 dark:bg-primary-900'
+                            : 'ml-3 bg-gray-100 dark:bg-gray-800'
+                        } rounded-lg p-3 max-w-md`}
+                      >
+                        {message.isTyping ? (
+                          <div className="flex space-x-2">
+                            <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" />
+                            <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-100" />
+                            <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-200" />
+                          </div>
+                        ) : (
+                          <p className="text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
+                            {message.content}
+                          </p>
+                        )}
+                      </div>
+                      {message.role === 'user' && (
+                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 font-bold">
+                          用户
+                        </div>
+                      )}
                     </div>
-                    <div className="ml-3 bg-gray-100 dark:bg-gray-800 rounded-lg p-3 max-w-md">
-                      <p className="text-gray-800 dark:text-gray-200">
-                        你好！我是栉云科技的AI智能体助手。我可以帮助你回答问题、提供信息、执行任务等。请问有什么我可以帮助你的吗？
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start justify-end">
-                    <div className="mr-3 bg-primary-100 dark:bg-primary-900 rounded-lg p-3 max-w-md">
-                      <p className="text-gray-800 dark:text-gray-200">
-                        你能介绍一下栉云科技的主要产品吗？
-                      </p>
-                    </div>
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 font-bold">
-                      用户
-                    </div>
-                  </div>
-
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary-600 flex items-center justify-center text-white font-bold">
-                      AI
-                    </div>
-                    <div className="ml-3 bg-gray-100 dark:bg-gray-800 rounded-lg p-3 max-w-md">
-                      <p className="text-gray-800 dark:text-gray-200">
-                        栉云科技的主要产品包括：
-                      </p>
-                      <ol className="list-decimal pl-5 mt-2 space-y-1">
-                        <li>
-                          ZhiAgent：智能体平台，能够自主完成复杂任务，提高工作效率。
-                        </li>
-                        <li>
-                          ZhiAssist：智能助手，为企业和个人提供全方位的智能服务。
-                        </li>
-                        <li>
-                          ZhiInsight：数据分析平台，从海量数据中挖掘有价值的信息和洞察。
-                        </li>
-                      </ol>
-                      <p className="mt-2 text-gray-800 dark:text-gray-200">
-                        这些产品都基于我们先进的AI技术，包括自然语言处理、机器学习、知识图谱和多模态交互等。
-                      </p>
-                    </div>
-                  </div>
+                  ))}
+                  <div ref={messagesEndRef} />
                 </div>
               </div>
 
               <div className="flex">
                 <input
+                  ref={inputRef}
                   type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyPress={handleKeyPress}
                   placeholder="输入你的问题..."
                   className="flex-1 border border-gray-300 dark:border-gray-700 rounded-l-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-800 dark:text-white"
+                  disabled={isLoading}
                 />
-                <button className="bg-primary-600 text-white px-4 py-2 rounded-r-md hover:bg-primary-700 transition-colors">
-                  发送
+                <button
+                  onClick={handleSend}
+                  disabled={isLoading || !input.trim()}
+                  className={`${
+                    isLoading || !input.trim()
+                      ? 'bg-gray-400 cursor-not-allowed'
+                      : 'bg-primary-600 hover:bg-primary-700'
+                  } text-white px-4 py-2 rounded-r-md transition-colors`}
+                >
+                  {isLoading ? '发送中...' : '发送'}
                 </button>
               </div>
             </div>

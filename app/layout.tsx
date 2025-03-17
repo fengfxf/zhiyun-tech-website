@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import type { Metadata } from 'next';
 import { ThemeProvider } from '../contexts/ThemeContext';
 import { LanguageProvider } from '../contexts/LanguageContext';
+import CozeChat from '../components/CozeChat';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -26,6 +27,7 @@ export default function RootLayout({
       <body>
         <Providers>
           {children}
+          <CozeChat />
         </Providers>
       </body>
     </html>

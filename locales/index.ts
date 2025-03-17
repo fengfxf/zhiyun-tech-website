@@ -22,7 +22,9 @@ export const translations: Translations = {
       learnMore: '了解更多',
       contactUs: '联系我们',
       theme: '主题',
-      language: '语言'
+      language: '语言',
+      chat: '在线咨询',
+      chatWithAI: 'AI助手'
     },
     hero: {
       title1: '智能体技术引领',
@@ -166,7 +168,9 @@ export const translations: Translations = {
       learnMore: 'Learn More',
       contactUs: 'Contact Us',
       theme: 'Theme',
-      language: 'Language'
+      language: 'Language',
+      chat: 'Chat',
+      chatWithAI: 'AI Assistant'
     },
     hero: {
       title1: 'AI Agent Technology Leading',

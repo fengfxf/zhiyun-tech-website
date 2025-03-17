@@ -11,7 +11,7 @@ import LanguageToggle from './LanguageToggle';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { t } = useLanguage();
+  const { t, isLoading } = useLanguage();
 
   const navigation = [
     { name: t('common.home'), href: '/' },
@@ -21,7 +21,6 @@ export default function Navbar() {
     { name: t('common.careers'), href: '/careers' },
     { name: t('common.demo'), href: '/demo' },
     { name: t('common.contact'), href: '/contact' },
-    { name: t('common.chat'), href: '/chat' },
   ];
 
   useEffect(() => {
@@ -36,6 +35,10 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  if (isLoading) {
+    return null; // 或者返回一个加载指示器
+  }
 
   return (
     <header

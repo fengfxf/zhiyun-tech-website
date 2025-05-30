@@ -501,7 +501,7 @@ export const translations: Translations = {
       freeTrial: 'Free Trial'
     },
     features: {
-      title: 'Powerful <span class="text-primary-600 dark:text-primary-400">Agent</span> Features',
+      title: 'Powerful Agent Features',
       subtitle: 'Our AI agents have multiple powerful features to meet the needs of various complex scenarios',
       efficiency: 'Efficient Automation',
       efficiencyDesc: 'Our agents can automatically complete complex tasks, improve work efficiency, and reduce labor costs.',

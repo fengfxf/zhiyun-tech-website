@@ -74,8 +74,8 @@ export default function Navbar() {
                   href={item.href}
                   className={`px-3 py-2 rounded-md text-sm font-medium ${
                     pathname === item.href
-                      ? 'text-primary-600 font-semibold'
-                      : 'text-gray-800 hover:text-primary-600'
+                      ? 'text-primary-600 dark:text-primary-400 font-semibold'
+                      : 'text-gray-800 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400'
                   } transition-colors`}
                 >
                   {item.name}

@@ -60,7 +60,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link href="/" className="flex-shrink-0">
               <span className="text-2xl font-bold text-primary-600 dark:text-primary-400">
-                栉云科技
+                {t('common.companyName')}
               </span>
             </Link>
           </div>

@@ -24,7 +24,23 @@ export const translations: Translations = {
       theme: '主题',
       language: '语言',
       chat: '在线咨询',
-      chatWithAI: 'AI助手'
+      chatWithAI: 'AI助手',
+      companyName: '栉云科技'
+    },
+    footer: {
+      solutions: '解决方案',
+      smartCustomerService: '智能客服',
+      dataAnalysis: '数据分析',
+      smartAssistant: '智能助手',
+      customDevelopment: '定制开发',
+      support: '支持',
+      docs: '文档',
+      api: 'API',
+      faq: '常见问题',
+      community: '社区',
+      company: '公司',
+      contactUs: '联系我们',
+      copyright: '保留所有权利.'
     },
     hero: {
       title1: '智能体技术引领',
@@ -491,7 +507,23 @@ export const translations: Translations = {
       theme: 'Theme',
       language: 'Language',
       chat: 'Chat',
-      chatWithAI: 'AI Assistant'
+      chatWithAI: 'AI Assistant',
+      companyName: 'Zhiyun Technology'
+    },
+    footer: {
+      solutions: 'Solutions',
+      smartCustomerService: 'Smart Customer Service',
+      dataAnalysis: 'Data Analysis',
+      smartAssistant: 'Smart Assistant',
+      customDevelopment: 'Custom Development',
+      support: 'Support',
+      docs: 'Docs',
+      api: 'API',
+      faq: 'FAQ',
+      community: 'Community',
+      company: 'Company',
+      contactUs: 'Contact Us',
+      copyright: 'All rights reserved.'
     },
     hero: {
       title1: 'AI Agent Technology Leading',

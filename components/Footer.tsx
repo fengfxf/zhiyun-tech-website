@@ -1,13 +1,16 @@
+"use client";
+
 import Link from 'next/link';
+import { useLanguage } from '../contexts/LanguageContext'
 
 const navigation = {
   main: [
-    { name: '首页', href: '/' },
-    { name: '产品', href: '/products' },
-    { name: '技术', href: '/technology' },
-    { name: '关于我们', href: '/about' },
-    { name: '加入我们', href: '/careers' },
-    { name: '联系方式', href: '/contact' },
+    { nameKey: 'common.home', href: '/' },
+    { nameKey: 'common.products', href: '/products' },
+    { nameKey: 'common.technology', href: '/technology' },
+    { nameKey: 'common.about', href: '/about' },
+    { nameKey: 'common.careers', href: '/careers' },
+    { nameKey: 'common.contact', href: '/contact' },
   ],
   social: [
     {
@@ -53,6 +56,7 @@ const navigation = {
 };
 
 export default function Footer() {
+  const { t } = useLanguage();
   return (
     <footer className="bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
@@ -60,10 +64,10 @@ export default function Footer() {
           <div className="space-y-8 xl:col-span-1">
             <div>
               <span className="text-2xl font-bold text-primary-600 dark:text-primary-400">
-                栉云科技
+                {t('common.companyName')}
               </span>
               <p className="text-gray-600 dark:text-gray-300 mt-2 text-base">
-                专注于AI应用和智能体开发，为企业和个人提供先进的人工智能解决方案。
+                {t('hero.description')}
               </p>
             </div>
             <div className="flex space-x-6">
@@ -82,51 +86,51 @@ export default function Footer() {
           <div className="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-base font-medium text-gray-900 dark:text-white">解决方案</h3>
+                <h3 className="text-base font-medium text-gray-900 dark:text-white">{t('footer.solutions') || '解决方案'}</h3>
                 <ul className="mt-4 space-y-4">
                   <li>
                     <Link href="#" className="text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">
-                      智能客服
+                      {t('footer.smartCustomerService') || '智能客服'}
                     </Link>
                   </li>
                   <li>
                     <Link href="#" className="text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">
-                      数据分析
+                      {t('footer.dataAnalysis') || '数据分析'}
                     </Link>
                   </li>
                   <li>
                     <Link href="#" className="text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">
-                      智能助手
+                      {t('footer.smartAssistant') || '智能助手'}
                     </Link>
                   </li>
                   <li>
                     <Link href="#" className="text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">
-                      定制开发
+                      {t('footer.customDevelopment') || '定制开发'}
                     </Link>
                   </li>
                 </ul>
               </div>
               <div className="mt-12 md:mt-0">
-                <h3 className="text-base font-medium text-gray-900 dark:text-white">支持</h3>
+                <h3 className="text-base font-medium text-gray-900 dark:text-white">{t('footer.support') || '支持'}</h3>
                 <ul className="mt-4 space-y-4">
                   <li>
                     <Link href="#" className="text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">
-                      文档
+                      {t('footer.docs') || '文档'}
                     </Link>
                   </li>
                   <li>
                     <Link href="#" className="text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">
-                      API
+                      {t('footer.api') || 'API'}
                     </Link>
                   </li>
                   <li>
                     <Link href="#" className="text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">
-                      常见问题
+                      {t('footer.faq') || '常见问题'}
                     </Link>
                   </li>
                   <li>
                     <Link href="#" className="text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">
-                      社区
+                      {t('footer.community') || '社区'}
                     </Link>
                   </li>
                 </ul>
@@ -134,28 +138,28 @@ export default function Footer() {
             </div>
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-base font-medium text-gray-900 dark:text-white">公司</h3>
+                <h3 className="text-base font-medium text-gray-900 dark:text-white">{t('footer.company') || '公司'}</h3>
                 <ul className="mt-4 space-y-4">
                   {navigation.main.map((item) => (
-                    <li key={item.name}>
+                    <li key={item.nameKey}>
                       <Link href={item.href} className="text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">
-                        {item.name}
+                        {t(item.nameKey)}
                       </Link>
                     </li>
                   ))}
                 </ul>
               </div>
               <div className="mt-12 md:mt-0">
-                <h3 className="text-base font-medium text-gray-900 dark:text-white">联系我们</h3>
+                <h3 className="text-base font-medium text-gray-900 dark:text-white">{t('footer.contactUs') || t('contact.title') || '联系我们'}</h3>
                 <ul className="mt-4 space-y-4">
                   <li className="text-base text-gray-600 dark:text-gray-300">
-                    <span className="font-medium">地址：</span>上海市浦东软件园三林园一号楼
+                    <span className="font-medium">{t('contact.address') || '地址'}：</span>{t('contact.addressValue')}
                   </li>
                   <li className="text-base text-gray-600 dark:text-gray-300">
-                    <span className="font-medium">电话：</span>13761566975
+                    <span className="font-medium">{t('contact.phone') || '电话'}：</span>{t('contact.phoneValue')}
                   </li>
                   <li className="text-base text-gray-600 dark:text-gray-300">
-                    <span className="font-medium">邮箱：</span>chris@zhiyuncloud.tech
+                    <span className="font-medium">{t('contact.email') || '邮箱'}：</span>{t('contact.emailValue')}
                   </li>
                 </ul>
               </div>
@@ -164,7 +168,7 @@ export default function Footer() {
         </div>
         <div className="mt-12 border-t border-gray-200 dark:border-gray-700 pt-8">
           <p className="text-base text-gray-500 dark:text-gray-400 text-center">
-            &copy; {new Date().getFullYear()} 上海栉云科技有限公司. 保留所有权利.
+            &copy; {new Date().getFullYear()} {t('common.companyName')}. {t('footer.copyright') || '保留所有权利.'}
           </p>
         </div>
       </div>

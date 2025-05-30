@@ -173,7 +173,7 @@ export const translations: Translations = {
       address: '地址',
       addressValue: '上海市浦东软件园三林园一号楼',
       phone: '电话',
-      phoneValue: '13761566975',
+      phoneValue: '86+ 13761566975',
       email: '邮箱',
       emailValue: 'chris@zhiyuncloud.tech',
       followUs: '关注我们',
@@ -508,7 +508,7 @@ export const translations: Translations = {
       language: 'Language',
       chat: 'Chat',
       chatWithAI: 'AI Assistant',
-      companyName: 'Zhiyun Technology'
+      companyName: 'ZhiYun Technology'
     },
     footer: {
       solutions: 'Solutions',
@@ -528,7 +528,7 @@ export const translations: Translations = {
     hero: {
       title1: 'AI Agent Technology Leading',
       title2: 'The New Era of AI Applications',
-      description: 'Shanghai Zhiyun Technology Co., Ltd. is committed to developing advanced AI agents to help enterprises and individuals achieve automated and intelligent workflows.',
+      description: 'Shanghai ZhiYun Technology Co., Ltd. is committed to developing advanced AI agents to help enterprises and individuals achieve automated and intelligent workflows.',
       exploreProducts: 'Explore Products',
       freeTrial: 'Free Trial'
     },
@@ -568,7 +568,7 @@ export const translations: Translations = {
     },
     products: {
       title: 'Our Products',
-      subtitle: 'Zhiyun Technology provides a series of advanced AI products and solutions to meet the needs of different industries and scenarios',
+      subtitle: 'ZhiYun Technology provides a series of advanced AI products and solutions to meet the needs of different industries and scenarios',
       features: 'Key Features',
       image: 'Image',
       agent: {
@@ -656,7 +656,7 @@ export const translations: Translations = {
       address: 'Address',
       addressValue: 'Building 1, Sanlin Software Park, Pudong, Shanghai',
       phone: 'Phone',
-      phoneValue: '13761566975',
+      phoneValue: '86+ 13761566975',
       email: 'Email',
       emailValue: 'chris@zhiyuncloud.tech',
       followUs: 'Follow Us',
@@ -673,7 +673,7 @@ export const translations: Translations = {
     },
     demo: {
       title: 'Experience Demo',
-      subtitle: 'Experience Zhiyun Technology\'s AI agents firsthand and feel the convenience and efficiency brought by advanced technology',
+      subtitle: 'Experience ZhiYun Technology\'s AI agents firsthand and feel the convenience and efficiency brought by advanced technology',
       agentDemo: 'Agent Demo',
       agentDemoDesc: 'Interact with our AI agent to experience natural language understanding and intelligent decision-making capabilities',
       inputPlaceholder: 'Enter your question...',
@@ -775,7 +775,7 @@ export const translations: Translations = {
     },
     about: {
       title: 'About Us',
-      description: 'Shanghai Zhiyun Technology Co., Ltd. is a high-tech enterprise focused on AI applications and intelligent agent development, committed to providing advanced artificial intelligence solutions for enterprises and individuals.',
+      description: 'Shanghai ZhiYun Technology Co., Ltd. is a high-tech enterprise focused on AI applications and intelligent agent development, committed to providing advanced artificial intelligence solutions for enterprises and individuals.',
       mission: {
         title: 'Our Mission',
         description: 'Through advanced AI technology, we make intelligent agents become powerful assistants for humans, improving work efficiency and creating more value.'
@@ -789,7 +789,7 @@ export const translations: Translations = {
         subtitle: 'Our Growth Journey',
         milestone1: {
           title: 'Company Founding',
-          description: 'Shanghai Zhiyun Technology Co., Ltd. was established in Shanghai Zhangjiang Hi-Tech Park.'
+          description: 'Shanghai ZhiYun Technology Co., Ltd. was established in Shanghai Zhangjiang Hi-Tech Park.'
         },
         milestone2: {
           title: 'First Round of Financing',
@@ -853,8 +853,8 @@ export const translations: Translations = {
       title: 'Join Us',
       description: 'Explore the infinite possibilities of AI with us and create technology that changes the world',
       whyChoose: {
-        title: 'Why Choose Zhiyun Technology',
-        description: 'Zhiyun Technology is an AI company full of vitality and innovation. We are committed to creating the most advanced intelligent agent technology and providing excellent AI solutions for users. Here, you will have the opportunity to:',
+        title: 'Why Choose ZhiYun Technology',
+        description: 'ZhiYun Technology is an AI company full of vitality and innovation. We are committed to creating the most advanced intelligent agent technology and providing excellent AI solutions for users. Here, you will have the opportunity to:',
         reason1: 'Participate in the research and innovation of cutting-edge AI technology',
         reason2: 'Work and learn with top industry talents',
         reason3: 'Express your creativity in an open and inclusive environment',

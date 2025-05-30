@@ -58,10 +58,16 @@ export default function Navbar() {
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center">
-            <Link href="/" className="flex-shrink-0">
+            <Link href="/" className="flex-shrink-0 flex items-center">
               <span className="text-2xl font-bold text-primary-600 dark:text-primary-400">
                 {t('common.companyName')}
               </span>
+              <img
+                src="/images/logo.png"
+                alt="logo"
+                className="ml-2 h-8 w-auto align-middle"
+                style={{ maxHeight: '2rem' }}
+              />
             </Link>
           </div>
           

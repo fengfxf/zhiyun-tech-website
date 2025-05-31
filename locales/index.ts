@@ -43,9 +43,9 @@ export const translations: Translations = {
       copyright: '保留所有权利.'
     },
     hero: {
-      title1: '智能体技术引领',
-      title2: 'AI应用新时代',
-      description: '栉云科技致力于开发先进的AI智能体，帮助企业和个人实现自动化、智能化的工作流程。',
+      title1: '专注AI应用的解决方案提供商',
+      title2: '释放AI生产力',
+      description: '栉云科技 · 为企业和个人提供可落地的智能自动化工具与服务。',
       exploreProducts: '探索产品',
       freeTrial: '免费体验'
     },
@@ -526,9 +526,9 @@ export const translations: Translations = {
       copyright: 'All rights reserved.'
     },
     hero: {
-      title1: 'AI Agent Technology Leading',
-      title2: 'The New Era of AI Applications',
-      description: 'Shanghai ZhiYun Technology Co., Ltd. is committed to developing advanced AI agents to help enterprises and individuals achieve automated and intelligent workflows.',
+      title1: 'A solution provider focusing on AI applications',
+      title2: 'Unleash AI productivity',
+      description: 'Zhiyun Technology provides practical intelligent automation tools and services for enterprises and individuals.',
       exploreProducts: 'Explore Products',
       freeTrial: 'Free Trial'
     },

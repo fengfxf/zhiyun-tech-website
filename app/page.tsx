@@ -12,7 +12,7 @@ export default function Home() {
       <HeroSection />
       <FeaturesSection />
       <CaseStudiesSection />
-      <ContactSection />
+      {/* <ContactSection /> */}
       <Footer />
     </main>
   );

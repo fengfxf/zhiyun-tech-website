@@ -26,7 +26,7 @@ export default function Navbar() {
       { name: t('common.technology'), href: '/technology' },
       { name: t('common.about'), href: '/about' },
       { name: t('common.careers'), href: '/careers' },
-      { name: t('common.contact'), href: '/contact' },
+      // { name: t('common.contact'), href: '/contact' },
     ]);
   }, [t, locale]); // 添加locale作为依赖项，确保语言变化时重新执行
 
@@ -65,8 +65,8 @@ export default function Navbar() {
               <img
                 src="/images/logo.png"
                 alt="logo"
-                className="ml-2 h-8 w-auto align-middle"
-                style={{ maxHeight: '2rem' }}
+                className="h-8 w-auto align-middle"
+                style={{ height: '3.2rem' }}
               />
             </Link>
           </div>

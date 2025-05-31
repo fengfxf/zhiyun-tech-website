@@ -10,7 +10,7 @@ const navigation = {
     { nameKey: 'common.technology', href: '/technology' },
     { nameKey: 'common.about', href: '/about' },
     { nameKey: 'common.careers', href: '/careers' },
-    { nameKey: 'common.contact', href: '/contact' },
+    // { nameKey: 'common.contact', href: '/contact' },
   ],
   social: [
     {

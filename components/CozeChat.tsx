@@ -14,7 +14,7 @@ export default function CozeChat() {
   useEffect(() => {
     // 加载 Coze SDK 脚本
     const script = document.createElement('script');
-    script.src = 'https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.5/libs/cn/index.js';
+    script.src = 'https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.10/libs/cn/index.js';
     script.async = true;
     script.onload = () => {
       try {
@@ -34,9 +34,9 @@ export default function CozeChat() {
             },
             auth: {
               type: 'token',
-              token: process.env.NEXT_PUBLIC_COZE_TOKEN || '',
+              token: process.env.NEXT_PUBLIC_COZE_TOKEN || 'pat_L4PR47RvlOUep0DeuCkJegQXmNV7yCChp48JrAf4qoAcHbMakDVQ9x5jAtrRuITu',
               onRefreshToken: function () {
-                return process.env.NEXT_PUBLIC_COZE_TOKEN || '';
+                return process.env.NEXT_PUBLIC_COZE_TOKEN || 'pat_L4PR47RvlOUep0DeuCkJegQXmNV7yCChp48JrAf4qoAcHbMakDVQ9x5jAtrRuITu';
               }
             }
           });

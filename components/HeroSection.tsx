@@ -70,9 +70,9 @@ export default function HeroSection() {
           {/* AI新闻热点滚动条 */}
           <motion.div
             variants={itemVariants}
-            className="mt-8 w-full"
+            className="mt-12 w-full"
           >
-            <NewsMarquee speed={60} />
+            <NewsMarquee speed={300} />
           </motion.div>
 
           <motion.div

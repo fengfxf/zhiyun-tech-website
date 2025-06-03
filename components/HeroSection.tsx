@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useLanguage } from '../contexts/LanguageContext';
+import NewsMarquee from './NewsMarquee';
 
 export default function HeroSection() {
   const { t } = useLanguage();
@@ -65,6 +66,10 @@ export default function HeroSection() {
           >
             {t('hero.description')}
           </motion.p>
+          {/* AI新闻热点滚动条 */}
+          <div className="max-w-6xl mx-auto">
+            <NewsMarquee speed={60} />
+          </div>
           <motion.div
             variants={itemVariants}
             className="mt-10 flex justify-center gap-4"

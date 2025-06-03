@@ -34,9 +34,9 @@ export default function CozeChat() {
             },
             auth: {
               type: 'token',
-              token: process.env.NEXT_PUBLIC_COZE_TOKEN || 'pat_L4PR47RvlOUep0DeuCkJegQXmNV7yCChp48JrAf4qoAcHbMakDVQ9x5jAtrRuITu',
+              token: process.env.NEXT_PUBLIC_COZE_TOKEN || '',
               onRefreshToken: function () {
-                return process.env.NEXT_PUBLIC_COZE_TOKEN || 'pat_L4PR47RvlOUep0DeuCkJegQXmNV7yCChp48JrAf4qoAcHbMakDVQ9x5jAtrRuITu';
+                return process.env.NEXT_PUBLIC_COZE_TOKEN || '';
               }
             }
           });

@@ -82,6 +82,13 @@ export default function Footer() {
                 </a>
               ))}
             </div>
+            <div className="mt-4">
+              <img
+                src="/images/website-logo.png"
+                alt="公司Logo"
+                style={{ width: '120px', height: '120px', objectFit: 'contain', borderRadius: '12px', background: '#181f2a' }}
+              />
+            </div>
           </div>
           <div className="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
             <div className="md:grid md:grid-cols-2 md:gap-8">

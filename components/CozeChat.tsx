@@ -11,6 +11,9 @@ declare global {
 }
 
 export default function CozeChat() {
+  // 读取环境变量（仅限NEXT_PUBLIC_前缀的变量可用于前端）
+  const cozeToken = process.env.NEXT_PUBLIC_COZE_TOKEN;
+  
   useEffect(() => {
     // 加载 Coze SDK 脚本
     const script = document.createElement('script');
@@ -34,9 +37,9 @@ export default function CozeChat() {
             },
             auth: {
               type: 'token',
-              token: 'pat_ptdVLwKTnVK5bVaC3dqzjgLKPS7HjJMFnq6KA0JTUVmrc5qC94FHVgvtNdp1Rq4m',              
+              token: cozeToken,
               onRefreshToken: function () {
-                return 'pat_ptdVLwKTnVK5bVaC3dqzjgLKPS7HjJMFnq6KA0JTUVmrc5qC94FHVgvtNdp1Rq4m'
+                return cozeToken;
               }
             }
           });
@@ -54,7 +57,7 @@ export default function CozeChat() {
         document.body.removeChild(script);
       }
     };
-  }, []);
+  }, [cozeToken]);
 
   return null;
 } 

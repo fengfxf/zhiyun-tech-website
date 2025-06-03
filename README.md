@@ -110,6 +110,7 @@
 ```
 NEXT_PUBLIC_SUPABASE_URL=你的Supabase项目URL
 NEXT_PUBLIC_SUPABASE_ANON_KEY=你的Supabase匿名密钥
+NEXT_PUBLIC_COZE_TOKEN=你的Coze聊天机器人Token  # 用于前端Coze Chat组件
 ```
 
 ### 安装依赖

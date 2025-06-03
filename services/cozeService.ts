@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const COZE_API_URL = 'https://api.coze.cn/open/api/bot/completions';
-const COZE_API_KEY = 'pat_ptdVLwKTnVK5bVaC3dqzjgLKPS7HjJMFnq6KA0JTUVmrc5qC94FHVgvtNdp1Rq4m';
+const COZE_API_KEY = process.env.NODE_ENV;
 
 export interface Message {
   role: 'user' | 'assistant';

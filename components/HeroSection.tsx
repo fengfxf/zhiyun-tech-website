@@ -66,10 +66,15 @@ export default function HeroSection() {
           >
             {t('hero.description')}
           </motion.p>
+
           {/* AI新闻热点滚动条 */}
-          <div className="max-w-6xl mx-auto">
+          <motion.div
+            variants={itemVariants}
+            className="mt-8 w-full"
+          >
             <NewsMarquee speed={60} />
-          </div>
+          </motion.div>
+
           <motion.div
             variants={itemVariants}
             className="mt-10 flex justify-center gap-4"

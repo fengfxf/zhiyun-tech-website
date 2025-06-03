@@ -1,10 +1,17 @@
 "use client";
 
+import React, { MouseEventHandler } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useLanguage } from '../contexts/LanguageContext';
 import NewsMarquee from './NewsMarquee';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 export default function HeroSection() {
   const { t } = useLanguage();
@@ -12,6 +19,10 @@ export default function HeroSection() {
     triggerOnce: true,
     threshold: 0.1,
   });
+
+  const handleTrialClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
+    e.preventDefault();
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -85,12 +96,21 @@ export default function HeroSection() {
             >
               {t('hero.exploreProducts')}
             </Link>
-            <Link
-              href="/demo"
-              className="hero-button secondary-button"
-            >
-              {t('hero.freeTrial')}
-            </Link>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button
+                    type="button"
+                    className="hero-button secondary-button"
+                  >
+                    {t('hero.freeTrial')}
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent sideOffset={5} className="select-none">
+                  <p className="font-medium">免费体验功能内测升级中，敬请期待</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </motion.div>
         </motion.div>
 

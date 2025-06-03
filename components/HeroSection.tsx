@@ -96,18 +96,25 @@ export default function HeroSection() {
             >
               {t('hero.exploreProducts')}
             </Link>
-            <TooltipProvider>
+            <TooltipProvider delayDuration={0}>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <button
                     type="button"
-                    className="hero-button secondary-button"
+                    className="hero-button secondary-button touch-manipulation"
+                    onTouchStart={(e) => {
+                      // 阻止默认行为以确保tooltip正常工作
+                      e.preventDefault();
+                    }}
                   >
                     {t('hero.freeTrial')}
                   </button>
                 </TooltipTrigger>
-                <TooltipContent sideOffset={5} className="select-none">
-                  <p className="font-medium">免费体验功能内测升级中，敬请期待</p>
+                <TooltipContent 
+                  sideOffset={5} 
+                  className="select-none bg-black/80 backdrop-blur-sm text-white px-3 py-2 rounded-lg shadow-lg border border-gray-700/50"
+                >
+                  <p className="font-medium text-sm">免费体验功能内测升级中，敬请期待</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>

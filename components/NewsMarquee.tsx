@@ -38,7 +38,11 @@ const NewsMarquee: React.FC<NewsMarqueeProps> = ({ speed = 200 }) => {
       try {
         setIsLoading(true);
         await new Promise(r => setTimeout(r, 8000)); // 强制8秒loading
-        const response = await fetch('/api/cron/fetch-ai-news');
+        
+        // 添加随机时间戳参数绕过缓存
+        const timestamp = new Date().getTime();
+        const response = await fetch(`/api/cron/fetch-ai-news?t=${timestamp}`);
+        
         const data = await response.json();
         if (data.success) {
           setNewsList(data.data);

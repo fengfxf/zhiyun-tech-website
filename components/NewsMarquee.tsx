@@ -1,20 +1,25 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
-import { Newspaper, Bot, ShieldCheck, Brain, Globe, Activity, Cloud, UserCheck, HeartPulse, Sparkles } from 'lucide-react';
+import { Bot, Brain, ShieldCheck, Sparkles, Globe, Activity, Cloud, UserCheck, HeartPulse, Newspaper } from 'lucide-react';
 
-// 模拟AI新闻数据（用图标代替图片）
-const newsList = [
-  { title: 'OpenAI发布GPT-5最新进展', url: 'https://openai.com/blog/gpt-5-update', icon: <Bot className="w-5 h-5 flex-shrink-0" /> },
-  { title: 'Google推出全新AI芯片', url: 'https://ai.googleblog.com/ai-chip', icon: <Brain className="w-5 h-5 flex-shrink-0" /> },
-  { title: '微软Copilot集成更多办公场景', url: 'https://blogs.microsoft.com/copilot-news', icon: <UserCheck className="w-5 h-5 flex-shrink-0" /> },
-  { title: '百度文心大模型能力升级', url: 'https://baidu.com/ai-news', icon: <Cloud className="w-5 h-5 flex-shrink-0" /> },
-  { title: 'AI安全治理成为行业焦点', url: 'https://aithoughts.com/ai-safety', icon: <ShieldCheck className="w-5 h-5 flex-shrink-0" /> },
-  { title: 'Anthropic发布Claude 3模型', url: 'https://www.anthropic.com/news/claude-3', icon: <Sparkles className="w-5 h-5 flex-shrink-0" /> },
-  { title: '阿里云通义千问API开放', url: 'https://tongyi.aliyun.com/', icon: <Globe className="w-5 h-5 flex-shrink-0" /> },
-  { title: 'Meta推出Llama 3大模型', url: 'https://ai.meta.com/llama/', icon: <Activity className="w-5 h-5 flex-shrink-0" /> },
-  { title: '清华发布ChatGLM4', url: 'https://chatglm.cn/', icon: <Newspaper className="w-5 h-5 flex-shrink-0" /> },
-  { title: 'AI助力医疗影像诊断新突破', url: 'https://medicalai.example.com/', icon: <HeartPulse className="w-5 h-5 flex-shrink-0" /> },
-];
+const iconMap: Record<string, React.ReactNode> = {
+  bot: <Bot className="w-5 h-5 flex-shrink-0" />,
+  brain: <Brain className="w-5 h-5 flex-shrink-0" />,
+  shieldCheck: <ShieldCheck className="w-5 h-5 flex-shrink-0" />,
+  sparkles: <Sparkles className="w-5 h-5 flex-shrink-0" />,
+  globe: <Globe className="w-5 h-5 flex-shrink-0" />,
+  activity: <Activity className="w-5 h-5 flex-shrink-0" />,
+  cloud: <Cloud className="w-5 h-5 flex-shrink-0" />,
+  userCheck: <UserCheck className="w-5 h-5 flex-shrink-0" />,
+  heartPulse: <HeartPulse className="w-5 h-5 flex-shrink-0" />,
+  newspaper: <Newspaper className="w-5 h-5 flex-shrink-0" />,
+};
+
+interface NewsItem {
+  title: string;
+  url: string;
+  icon: string;
+}
 
 interface NewsMarqueeProps {
   speed?: number; // px/s
@@ -24,15 +29,39 @@ const NewsMarquee: React.FC<NewsMarqueeProps> = ({ speed = 200 }) => {
   const { theme } = useTheme();
   const marqueeInnerRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
+  const [newsList, setNewsList] = useState<NewsItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // 获取新闻数据
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await fetch('/api/cron/fetch-ai-news');
+        const data = await response.json();
+        if (data.success) {
+          setNewsList(data.data);
+        }
+      } catch (error) {
+        console.error('Error fetching news:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchNews();
+    // 每4小时更新一次数据
+    const interval = setInterval(fetchNews, 4 * 60 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   // 动态生成动画时长
-  const [duration, setDuration] = useState(5); // 减少默认时长到15秒
+  const [duration, setDuration] = useState(5);
   useEffect(() => {
     if (marqueeInnerRef.current) {
       const width = marqueeInnerRef.current.scrollWidth;
       setDuration(width / speed);
     }
-  }, [speed, isPaused]);
+  }, [speed, isPaused, newsList]);
 
   // 样式适配
   const textColor = theme === 'dark' ? 'text-gray-100' : 'text-gray-900';
@@ -41,6 +70,20 @@ const NewsMarquee: React.FC<NewsMarqueeProps> = ({ speed = 200 }) => {
   const gradientColor = theme === 'dark' 
     ? 'from-gray-800 via-transparent to-gray-800' 
     : 'from-gray-100 via-transparent to-gray-100';
+
+  if (isLoading) {
+    return (
+      <div className="w-full max-w-7xl mx-auto">
+        <div className={`relative overflow-hidden ${bgColor} backdrop-blur-sm rounded-lg border border-gray-200/10 dark:border-gray-700/10 shadow-lg h-12 flex items-center justify-center`}>
+          <span className={`${textColor} text-sm`}>Loading news...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (newsList.length === 0) {
+    return null;
+  }
 
   return (
     <div className="w-full max-w-7xl mx-auto">
@@ -54,7 +97,7 @@ const NewsMarquee: React.FC<NewsMarqueeProps> = ({ speed = 200 }) => {
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        {/* 渐变遮罩 - 调整渐变方向和透明度 */}
+        {/* 渐变遮罩 */}
         <div className={`absolute inset-0 z-10 pointer-events-none bg-gradient-to-r ${gradientColor}`} 
              style={{
                background: theme === 'dark'
@@ -91,7 +134,7 @@ const NewsMarquee: React.FC<NewsMarqueeProps> = ({ speed = 200 }) => {
                 }}
               >
                 <div className={`${iconColor} transform transition-transform duration-300 group-hover:rotate-12`}>
-                  {news.icon}
+                  {iconMap[news.icon] || iconMap['newspaper']}
                 </div>
                 <span className="text-sm font-medium">{news.title}</span>
                 {idx !== [...newsList, ...newsList].length - 1 && (

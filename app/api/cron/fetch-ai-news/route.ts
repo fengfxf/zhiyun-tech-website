@@ -88,20 +88,54 @@ export async function GET() {
 
     // 如果没有新闻数据，返回空数组而不是错误
     if (formattedNews.length === 0) {
-      return NextResponse.json({ success: true, data: [] });
+      return new NextResponse(
+        JSON.stringify({ success: true, data: [] }),
+        {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0',
+            'Surrogate-Control': 'no-store'
+          }
+        }
+      );
     }
 
-    return NextResponse.json({ success: true, data: formattedNews });
+    // 返回带有禁用缓存头的响应
+    return new NextResponse(
+      JSON.stringify({ success: true, data: formattedNews }),
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0',
+          'Surrogate-Control': 'no-store'
+        }
+      }
+    );
   } catch (error) {
     console.error('Error fetching AI news:', error);
-    // 返回一个友好的错误响应
-    return NextResponse.json(
-      { 
+    // 返回一个友好的错误响应，同样带有禁用缓存头
+    return new NextResponse(
+      JSON.stringify({ 
         success: false, 
         error: error instanceof Error ? error.message : 'Failed to fetch news',
         data: [] // 返回空数组作为后备数据
-      },
-      { status: 500 }
+      }),
+      {
+        status: 500,
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0',
+          'Surrogate-Control': 'no-store'
+        }
+      }
     );
   }
 } 

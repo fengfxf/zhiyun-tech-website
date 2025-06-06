@@ -36,6 +36,8 @@ const NewsMarquee: React.FC<NewsMarqueeProps> = ({ speed = 200 }) => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
+        setIsLoading(true);
+        await new Promise(r => setTimeout(r, 8000)); // 强制8秒loading
         const response = await fetch('/api/cron/fetch-ai-news');
         const data = await response.json();
         if (data.success) {
@@ -49,9 +51,9 @@ const NewsMarquee: React.FC<NewsMarqueeProps> = ({ speed = 200 }) => {
     };
 
     fetchNews();
-    // 每4小时更新一次数据
-    const interval = setInterval(fetchNews, 4 * 60 * 60 * 1000);
-    return () => clearInterval(interval);
+    // 移除定时缓存逻辑，每次加载都重新请求
+    // const interval = setInterval(fetchNews, 4 * 60 * 60 * 1000);
+    // return () => clearInterval(interval);
   }, []);
 
   // 动态生成动画时长
@@ -75,7 +77,19 @@ const NewsMarquee: React.FC<NewsMarqueeProps> = ({ speed = 200 }) => {
     return (
       <div className="w-full max-w-7xl mx-auto">
         <div className={`relative overflow-hidden ${bgColor} backdrop-blur-sm rounded-lg border border-gray-200/10 dark:border-gray-700/10 shadow-lg h-12 flex items-center justify-center`}>
-          <span className={`${textColor} text-sm`}>Loading news...</span>
+          <span
+            className={`text-base font-semibold tracking-wide ${textColor} drop-shadow-sm select-none animate-pulse flex items-center`}
+            style={{
+              letterSpacing: '0.08em',
+              fontFamily: 'JetBrains Mono, Fira Mono, Menlo, monospace',
+              textShadow: theme === 'dark'
+                ? '0 0 8px #00eaff88, 0 0 2px #00eaff44'
+                : '0 0 8px #0ea5e988, 0 0 2px #0ea5e944',
+            }}
+          >
+            正在执行ZHIYUN · AI新闻咨询智能体
+            <Activity className="ml-2 w-5 h-5 text-primary-500 animate-spin" />
+          </span>
         </div>
       </div>
     );

@@ -75,9 +75,9 @@ export default function Navbar() {
           {/* Desktop menu */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-4">
-              {navigation.map((item) => (
+              {navigation.map((item, index) => (
                 <Link
-                  key={item.name}
+                  key={`${item.href}-${index}`} // 使用href和index的组合作为唯一key
                   href={item.href}
                   className={`px-3 py-2 rounded-md text-sm font-medium ${
                     pathname === item.href
@@ -85,7 +85,7 @@ export default function Navbar() {
                       : 'text-gray-800 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400'
                   } transition-colors`}
                 >
-                  {item.name}
+                  {item.name || item.href} {/* 防止显示空字符串 */}
                 </Link>
               ))}
               <div className="ml-4 flex items-center space-x-2">
@@ -124,9 +124,9 @@ export default function Navbar() {
           className="md:hidden bg-white dark:bg-gray-900 shadow-lg"
         >
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navigation.map((item) => (
+            {navigation.map((item, index) => (
               <Link
-                key={item.name}
+                key={`${item.href}-${index}`} // 使用href和index的组合作为唯一key
                 href={item.href}
                 className={`block px-3 py-2 rounded-md text-base font-medium ${
                   pathname === item.href
@@ -135,7 +135,7 @@ export default function Navbar() {
                 } transition-colors`}
                 onClick={() => setIsOpen(false)}
               >
-                {item.name}
+                {item.name || item.href} {/* 防止显示空字符串 */}
               </Link>
             ))}
           </div>

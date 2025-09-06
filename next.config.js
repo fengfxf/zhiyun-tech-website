@@ -16,17 +16,7 @@ const nextConfig = {
   },
   // 添加其他优化配置
   trailingSlash: true,
-  output: 'export',
-  // 配置Sitemap生成
-  async generateRobotsTxt() {
-    return {
-      policies: [
-        { userAgent: '*', allow: '/' },
-        { userAgent: '*', disallow: '/admin/' },
-      ],
-      sitemap: 'https://www.zhiyunllm.com/sitemap.xml',
-    };
-  },
+  output: 'export'
 };
 
 module.exports = nextConfig;

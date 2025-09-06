@@ -16,6 +16,8 @@ interface Product {
   image: string;
 }
 
+// 移除这里的metadata导出
+
 export default function Products() {
   const { t, locale } = useLanguage();
   
@@ -255,4 +257,4 @@ export default function Products() {
       <Footer />
     </div>
   );
-} 
+}

@@ -3,10 +3,30 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['localhost'],
-    unoptimized: true,
+    domains: ['localhost', 'example.com'], // 添加实际图片域名
+    unoptimized: true, // 必须设置为true以兼容静态导出模式
+    formats: ['image/avif', 'image/webp'], // 支持现代图片格式
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'example.com',
+        pathname: '/images/**',
+      },
+    ],
   },
-  // output: 'export',
-}
+  // 添加其他优化配置
+  trailingSlash: true,
+  output: 'export',
+  // 配置Sitemap生成
+  async generateRobotsTxt() {
+    return {
+      policies: [
+        { userAgent: '*', allow: '/' },
+        { userAgent: '*', disallow: '/admin/' },
+      ],
+      sitemap: 'https://www.zhiyunllm.com/sitemap.xml',
+    };
+  },
+};
 
-module.exports = nextConfig 
+module.exports = nextConfig;

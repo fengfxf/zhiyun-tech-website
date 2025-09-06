@@ -19,18 +19,17 @@ export default function Navbar() {
   const [navigation, setNavigation] = useState<Array<{name: string, href: string}>>([]);
 
   // 当语言变化时更新导航项
-  // 优化导航结构，添加行业解决方案入口
-  // 在useEffect中的导航项数组添加marketing链接
   useEffect(() => {
     setNavigation([
       { name: t('common.home'), href: '/' },
       { name: t('common.products'), href: '/products' },
-      { name: t('common.marketing'), href: '/marketing' }, // 添加marketing链接
       { name: t('common.technology'), href: '/technology' },
       { name: t('common.about'), href: '/about' },
-      { name: t('common.careers'), href: '/careers' }
+      { name: t('common.careers'), href: '/careers' },
+      // { name: t('common.marketing'), href: '/marketing' },
     ]);
-  }, [t, locale]);
+  }, [t, locale]); // 添加locale作为依赖项，确保语言变化时重新执行
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -143,4 +142,4 @@ export default function Navbar() {
       )}
     </header>
   );
-}
+} 

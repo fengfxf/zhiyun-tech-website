@@ -68,7 +68,7 @@ export default function Join() {
       {
         titleKey: 'join.benefits.benefit3.title',
         descriptionKey: 'join.benefits.benefit3.description',
-      },
+      }
     ];
 
     // 翻译职位数据
@@ -219,7 +219,7 @@ export default function Join() {
             >
               {benefits.map((benefit, index) => (
                 <motion.div 
-                  key={benefit.title} 
+                  key={`benefit-${index}`} 
                   className="card p-6 bg-white dark:bg-gray-800 rounded-lg"
                   variants={fadeInUp}
                   initial="rest"
@@ -290,7 +290,7 @@ export default function Join() {
           >
             {positions.map((position, index) => (
               <motion.div 
-                key={position.title} 
+                key={`position-${index}`} 
                 className="card p-6 bg-white dark:bg-gray-800 rounded-lg"
                 variants={cardHoverEffect}
                 initial="rest"
@@ -355,4 +355,4 @@ export default function Join() {
       <Footer />
     </div>
   );
-} 
+}

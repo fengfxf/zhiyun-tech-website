@@ -99,6 +99,10 @@ export default function Careers() {
     ];
     
     // 福利数据
+    // 查找所有SVG路径并检查格式，特别是包含'a'命令的路径
+    // 错误可能在福利数据或其他SVG图标中
+    
+    // 修改所有福利数据中的SVG图标，确保路径格式正确
     const benefitData = [
       {
         titleKey: 'careers.benefits.benefit1.title',
@@ -240,7 +244,8 @@ export default function Careers() {
       icon: benefit.icon
     }));
     
-    // 翻译加入我们数据
+    // 修改加入我们部分的图片加载方式
+    // 1. 首先确保图片路径设置正确
     setCareer({
       title: t('careers.title') || '加入我们',
       description: t('careers.description') || '与我们一起探索AI的无限可能，创造改变世界的技术',
@@ -356,6 +361,12 @@ export default function Careers() {
                   alt={career.title}
                   fill
                   className="object-cover"
+                  onError={(e) => {
+                    // 尝试加载默认图片作为备用
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null; // 防止无限循环
+                    target.src = '/images/logo.jpg'; // 使用实际存在的默认图片路径
+                  }}
                 />
               </div>
             </div>
@@ -375,8 +386,8 @@ export default function Careers() {
             </div>
 
             <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-              {benefits.map((benefit) => (
-                <div key={benefit.title} className="card p-6">
+              {benefits.map((benefit, index) => (
+                <div key={`${benefit.title}-${index}`} className="card p-6">
                   <div className="w-12 h-12 bg-primary-100 dark:bg-primary-800 rounded-full flex items-center justify-center mb-4">
                     <div className="text-primary-600 dark:text-primary-400">
                       {benefit.icon}
@@ -474,7 +485,7 @@ export default function Careers() {
             </div>
 
             <div className="mt-12 relative">
-              <div className="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gray-200 dark:bg-gray-700"></div>
+              {/* <div className="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gray-200 dark:bg-gray-700"></div> */}
               <div className="space-y-12">
                 <div className="relative">
                   <div className="flex items-center">
@@ -559,4 +570,4 @@ export default function Careers() {
       <Footer />
     </div>
   );
-} 
+}
